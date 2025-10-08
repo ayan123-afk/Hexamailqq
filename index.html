@@ -1,0 +1,4484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hexa Mail</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* All your existing CSS styles remain the same */
+        :root {
+            --primary: #1a73e8;
+            --primary-dark: #0d47a1;
+            --primary-light: #e8f0fe;
+            --secondary: #34a853;
+            --secondary-dark: #2e7d32;
+            --accent: #f25c54;
+            --dark: #202124;
+            --darker: #3c4043;
+            --light: #f8f9fa;
+            --gray: #f1f3f4;
+            --gray-dark: #dadce0;
+            --success: #34a853;
+            --warning: #fbbc04;
+            --error: #ea4335;
+            --card-gradient: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 249, 250, 0.9) 100%);
+            --header-gradient: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            
+            --font-heading: 'Playfair Display', serif;
+            --font-main: 'Montserrat', sans-serif;
+            --font-secondary: 'Poppins', sans-serif;
+            
+            --shadow-sm: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+            --shadow-md: 0 1px 3px 0 rgba(60, 64, 67, 0.3), 0 4px 8px 3px rgba(60, 64, 67, 0.15);
+            --shadow-lg: 0 2px 6px 2px rgba(60, 64, 67, 0.15), 0 1px 2px rgba(60, 64, 67, 0.3);
+            --shadow-xl: 0 4px 8px 3px rgba(60, 64, 67, 0.15), 0 1px 3px rgba(60, 64, 67, 0.3);
+            --shadow-inset: inset 0 0 15px rgba(0, 0, 0, 0.05);
+            
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            
+            --border-radius: 8px;
+            --border-radius-sm: 6px;
+            
+            --glass-bg: rgba(255, 255, 255, 0.95);
+            --glass-border: rgba(255, 255, 255, 0.25);
+            --glass-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+            
+            --sidebar-width: 280px;
+            --header-height: 64px;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-family: var(--font-main);
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        
+        /* All other existing styles remain the same */
+        /* ... */
+        
+        /* New styles for email integration */
+        .email-provider-badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+            background: var(--gray);
+            color: var(--darker);
+        }
+        
+        .gmail-badge {
+            background: #d44638;
+            color: white;
+        }
+        
+        .yahoo-badge {
+            background: #6001d2;
+            color: white;
+        }
+        
+        .outlook-badge {
+            background: #0078d4;
+            color: white;
+        }
+        
+        .external-email-notice {
+            background-color: var(--primary-light);
+            padding: 0.75rem;
+            border-radius: var(--border-radius-sm);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: var(--primary-dark);
+            border-left: 3px solid var(--primary);
+        }
+        
+        .external-email-notice i {
+            margin-right: 0.5rem;
+        }
+    </style>
+    <style>
+        :root {
+            --primary: #1a73e8;
+            --primary-dark: #0d47a1;
+            --primary-light: #e8f0fe;
+            --secondary: #34a853;
+            --secondary-dark: #2e7d32;
+            --accent: #f25c54;
+            --dark: #202124;
+            --darker: #3c4043;
+            --light: #f8f9fa;
+            --gray: #f1f3f4;
+            --gray-dark: #dadce0;
+            --success: #34a853;
+            --warning: #fbbc04;
+            --error: #ea4335;
+            --card-gradient: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 249, 250, 0.9) 100%);
+            --header-gradient: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            
+            --font-heading: 'Playfair Display', serif;
+            --font-main: 'Montserrat', sans-serif;
+            --font-secondary: 'Poppins', sans-serif;
+            
+            --shadow-sm: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+            --shadow-md: 0 1px 3px 0 rgba(60, 64, 67, 0.3), 0 4px 8px 3px rgba(60, 64, 67, 0.15);
+            --shadow-lg: 0 2px 6px 2px rgba(60, 64, 67, 0.15), 0 1px 2px rgba(60, 64, 67, 0.3);
+            --shadow-xl: 0 4px 8px 3px rgba(60, 64, 67, 0.15), 0 1px 3px rgba(60, 64, 67, 0.3);
+            --shadow-inset: inset 0 0 15px rgba(0, 0, 0, 0.05);
+            
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            
+            --border-radius: 8px;
+            --border-radius-sm: 6px;
+            
+            --glass-bg: rgba(255, 255, 255, 0.95);
+            --glass-border: rgba(255, 255, 255, 0.25);
+            --glass-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+            
+            --sidebar-width: 280px;
+            --header-height: 64px;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-family: var(--font-main);
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        
+        /* Loading Animation */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--light);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            transition: opacity 0.5s ease-out;
+        }
+        
+        .loading-logo {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 700;
+        }
+        
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid var(--primary-light);
+            border-top: 5px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .loading-text {
+            margin-top: 1rem;
+            font-size: 1rem;
+            color: var(--darker);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+        
+        /* Mobile-first responsive design */
+        .mobile-only {
+            display: block;
+        }
+        
+        .desktop-only {
+            display: none;
+        }
+        
+        /* Header Styles */
+        .header {
+            background: white;
+            color: var(--dark);
+            padding: 0 1rem;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            height: var(--header-height);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--gray-dark);
+        }
+        
+        .logo {
+            font-family: var(--font-main);
+            font-size: 1.4rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--primary);
+        }
+        
+        .logo-icon {
+            font-size: 1.8rem;
+            color: var(--primary);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        /* Mobile menu button */
+        .mobile-menu-btn {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 30px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 10;
+        }
+        
+        .mobile-menu-btn span {
+            width: 30px;
+            height: 2px;
+            background: var(--dark);
+            border-radius: 2px;
+            transition: var(--transition);
+            position: relative;
+            transform-origin: 1px;
+        }
+        
+        .mobile-menu-btn.active span:nth-child(1) {
+            transform: rotate(45deg);
+        }
+        
+        .mobile-menu-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .mobile-menu-btn.active span:nth-child(3) {
+            transform: rotate(-45deg);
+        }
+        
+        /* Mobile sidebar */
+        .mobile-sidebar {
+            position: fixed;
+            top: 0;
+            left: -280px;
+            width: var(--sidebar-width);
+            height: 100vh;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-right: 1px solid var(--glass-border);
+            z-index: 100;
+            overflow-y: auto;
+            transition: var(--transition);
+            padding: 1.5rem 1rem;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .mobile-sidebar.active {
+            left: 0;
+        }
+        
+        .mobile-sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 99;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+        }
+        
+        .mobile-sidebar-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        /* Button Styles */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.625rem 1.25rem;
+            border-radius: var(--border-radius);
+            font-family: var(--font-main);
+            font-weight: 500;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            outline: none;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(255, 255, 255, 0.2), transparent);
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .btn:hover::before {
+            opacity: 1;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: white;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--secondary-dark);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .btn-text {
+            background: none;
+            border: none;
+            color: var(--primary);
+            padding: 0;
+            font-weight: 500;
+            position: relative;
+        }
+        
+        .btn-text::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+        
+        .btn-text:hover::after {
+            width: 100%;
+        }
+        
+        .btn-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: transparent;
+            color: var(--darker);
+            transition: var(--transition);
+        }
+        
+        .btn-icon:hover {
+            background-color: var(--gray);
+            transform: scale(1.05);
+        }
+        
+        /* Container & Card Styles */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            padding-top: calc(var(--header-height) + 1rem);
+        }
+        
+        .card {
+            background: var(--glass-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid var(--gray-dark);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        
+        .card:hover {
+            box-shadow: var(--shadow-md);
+        }
+        
+        .card-header {
+            padding: 1.25rem;
+            border-bottom: 1px solid var(--gray-dark);
+            background: var(--card-gradient);
+        }
+        
+        .card-header h2 {
+            font-family: var(--font-main);
+            color: var(--dark);
+            font-size: 1.4rem;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .card-body {
+            padding: 1.5rem;
+        }
+        
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 1.25rem;
+            position: relative;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--darker);
+            font-family: var(--font-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 1px solid var(--gray-dark);
+            border-radius: var(--border-radius-sm);
+            font-size: 1rem;
+            font-family: var(--font-main);
+            transition: var(--transition);
+            background-color: white;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px var(--primary-light);
+        }
+        
+        .password-toggle {
+            position: absolute;
+            right: 12px;
+            top: 42px;
+            cursor: pointer;
+            color: var(--dark);
+            transition: var(--transition);
+            background: rgba(255, 255, 255, 0.5);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .password-toggle:hover {
+            color: var(--primary);
+            background: rgba(255, 255, 255, 0.8);
+        }
+        
+        .form-text {
+            margin-top: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--darker);
+            font-family: var(--font-secondary);
+        }
+        
+        .password-strength {
+            height: 4px;
+            width: 100%;
+            background: #e0e0e0;
+            border-radius: 2px;
+            margin-top: 0.5rem;
+            overflow: hidden;
+        }
+        
+        .password-strength-bar {
+            height: 100%;
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+        
+        /* Auth Pages */
+        .auth-container {
+            max-width: 450px;
+            margin: 2rem auto;
+        }
+        
+        .auth-switch {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-family: var(--font-secondary);
+            color: var(--dark);
+        }
+        
+        /* Dashboard Styles */
+        .dashboard {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        .sidebar {
+            display: none;
+        }
+        
+        .main-content {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            padding: 1.5rem;
+            border: 1px solid var(--gray-dark);
+        }
+        
+        /* Welcome Message */
+        .welcome-message {
+            background: linear-gradient(135deg, rgba(232, 240, 254, 0.8), rgba(234, 245, 255, 0.8));
+            padding: 1.25rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--primary);
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .welcome-message h3 {
+            font-family: var(--font-main);
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+            font-size: 1.4rem;
+        }
+        
+        .welcome-message p {
+            color: var(--darker);
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+        
+        /* Message List */
+        .message-list {
+            list-style: none;
+        }
+        
+        .message-item {
+            padding: 1rem;
+            border-bottom: 1px solid var(--gray-dark);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border-radius: var(--border-radius);
+        }
+        
+        .message-item:hover {
+            background-color: var(--gray);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .message-item.unread {
+            background-color: var(--primary-light);
+            border-left: 3px solid var(--primary);
+        }
+        
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+            flex-shrink: 0;
+            font-size: 1rem;
+        }
+        
+        .message-content {
+            flex-grow: 1;
+            min-width: 0;
+        }
+        
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.25rem;
+            align-items: center;
+        }
+        
+        .message-sender {
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: 1rem;
+            color: var(--dark);
+        }
+        
+        .message-time {
+            color: var(--darker);
+            font-size: 0.8rem;
+            flex-shrink: 0;
+            margin-left: 0.5rem;
+        }
+        
+        .message-subject {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: var(--dark);
+            font-size: 1rem;
+        }
+        
+        .message-preview {
+            color: var(--darker);
+            font-size: 0.9rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        /* Message Detail */
+        .message-detail {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            padding: 1.5rem;
+            margin-top: 1rem;
+            animation: fadeIn 0.3s ease-out;
+            border: 1px solid var(--gray-dark);
+        }
+        
+        .message-detail-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--gray-dark);
+        }
+        
+        .message-detail-title {
+            font-family: var(--font-main);
+            font-size: 1.4rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .message-detail-meta {
+            color: var(--darker);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        .message-detail-body {
+            line-height: 1.8;
+            white-space: pre-wrap;
+            padding: 1rem 0;
+            font-size: 1rem;
+            color: var(--dark);
+        }
+        
+        .message-actions {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+        }
+        
+        /* Compose Form */
+        .compose-form {
+            display: grid;
+            gap: 1.25rem;
+        }
+        
+        .compose-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        /* User Profile Modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition-slow);
+        }
+        
+        .modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: var(--border-radius);
+            width: 95%;
+            max-width: 500px;
+            transform: translateY(20px);
+            transition: var(--transition-slow);
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .modal.active .modal-content {
+            transform: translateY(0);
+        }
+        
+        .modal-header {
+            padding: 1.25rem;
+            border-bottom: 1px solid var(--gray-dark);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h3 {
+            font-family: var(--font-main);
+            color: var(--dark);
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+        
+        .modal-body {
+            padding: 1.5rem;
+        }
+        
+        .profile-info {
+            margin-bottom: 1.5rem;
+        }
+        
+        .profile-info-item {
+            display: flex;
+            margin-bottom: 1rem;
+            align-items: flex-start;
+        }
+        
+        .profile-info-label {
+            font-weight: 600;
+            width: 100px;
+            color: var(--darker);
+            flex-shrink: 0;
+            font-size: 1rem;
+        }
+        
+        .profile-info-value {
+            flex-grow: 1;
+            font-size: 1rem;
+            color: var(--dark);
+        }
+        
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--darker);
+        }
+        
+        .empty-state i {
+            font-size: 3rem;
+            color: var(--gray-dark);
+            margin-bottom: 1rem;
+        }
+        
+        .empty-state h3 {
+            font-family: var(--font-main);
+            margin-bottom: 0.5rem;
+            font-size: 1.4rem;
+            color: var(--dark);
+            font-weight: 600;
+        }
+        
+        .empty-state p {
+            max-width: 400px;
+            margin: 0 auto;
+            font-size: 1rem;
+        }
+        
+        /* Profile Photo Upload */
+        .profile-photo-upload {
+            position: relative;
+            width: 100px;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .profile-photo-preview {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: var(--primary);
+            background-size: cover;
+            background-position: center;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            font-weight: 600;
+            box-shadow: var(--shadow-sm);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .profile-photo-preview:hover {
+            transform: scale(1.05);
+        }
+        
+        .profile-photo-upload input {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+        
+        .profile-photo-edit {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        /* Invitation system */
+        .invitation-item {
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            background: var(--primary-light);
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .invitation-info {
+            flex: 1;
+        }
+        
+        .invitation-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        /* Navigation */
+        .nav-menu {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+        
+        .nav-item {
+            margin-bottom: 0.5rem;
+        }
+        
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            border-radius: var(--border-radius);
+            color: var(--darker);
+            text-decoration: none;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+        
+        .nav-link:hover {
+            background-color: var(--primary-light);
+            color: var(--primary);
+        }
+        
+        .nav-link.active {
+            background-color: var(--primary-light);
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .nav-link i {
+            margin-right: 0.75rem;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .nav-link .badge {
+            margin-left: auto;
+        }
+        
+        /* Chat Styles */
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            height: 70vh;
+            border: 1px solid var(--gray-dark);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            background: white;
+        }
+        
+        .chat-header {
+            padding: 1rem;
+            background: var(--primary-light);
+            border-bottom: 1px solid var(--gray-dark);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chat-title {
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+        
+        .chat-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .message {
+            max-width: 80%;
+            padding: 0.75rem 1rem;
+            border-radius: 18px;
+            position: relative;
+            animation: fadeIn 0.3s;
+        }
+        
+        .message.sent {
+            align-self: flex-end;
+            background: var(--primary);
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+        
+        .message.received {
+            align-self: flex-start;
+            background: var(--gray);
+            color: var(--dark);
+            border-bottom-left-radius: 4px;
+        }
+        
+        .message-time {
+            font-size: 0.7rem;
+            margin-top: 0.25rem;
+            opacity: 0.8;
+            text-align: right;
+        }
+        
+        .message-sender {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            font-size: 0.8rem;
+        }
+        
+        .chat-input-container {
+            display: flex;
+            padding: 1rem;
+            border-top: 1px solid var(--gray-dark);
+            background: white;
+            gap: 0.5rem;
+        }
+        
+        .chat-input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid var(--gray-dark);
+            border-radius: 24px;
+            outline: none;
+            font-family: var(--font-main);
+            resize: none;
+            max-height: 120px;
+        }
+        
+        .chat-input:focus {
+            border-color: var(--primary);
+        }
+        
+        .emoji-btn, .voice-btn, .send-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .emoji-btn:hover, .voice-btn:hover, .send-btn:hover {
+            background: var(--gray);
+        }
+        
+        .send-btn {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .send-btn:hover {
+            background: var(--primary-dark);
+        }
+        
+        .emoji-picker {
+            position: absolute;
+            bottom: 70px;
+            right: 10px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            padding: 0.5rem;
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 0.25rem;
+            z-index: 10;
+            max-width: 300px;
+            animation: fadeIn 0.2s;
+        }
+        
+        .emoji {
+            padding: 0.25rem;
+            cursor: pointer;
+            text-align: center;
+            border-radius: 4px;
+            transition: var(--transition);
+            font-size: 1.2rem;
+        }
+        
+        .emoji:hover {
+            background: var(--gray);
+        }
+        
+        .voice-recorder {
+            position: absolute;
+            bottom: 70px;
+            left: 10px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            z-index: 10;
+            animation: fadeIn 0.2s;
+        }
+        
+        .voice-timer {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .voice-action-btn {
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .voice-stop {
+            background: var(--error);
+            color: white;
+        }
+        
+        .voice-stop:hover {
+            background: #d32f2f;
+        }
+        
+        .voice-message {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 18px;
+        }
+        
+        .voice-play-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        .voice-wave {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            height: 30px;
+        }
+        
+        .voice-bar {
+            width: 2px;
+            background: var(--primary);
+            border-radius: 1px;
+            height: 20px;
+            animation: wave 1s infinite ease-in-out;
+        }
+        
+        @keyframes wave {
+            0%, 100% { height: 10px; }
+            50% { height: 20px; }
+        }
+        
+        .voice-bar:nth-child(2) { animation-delay: 0.2s; }
+        .voice-bar:nth-child(3) { animation-delay: 0.4s; }
+        .voice-bar:nth-child(4) { animation-delay: 0.6s; }
+        .voice-bar:nth-child(5) { animation-delay: 0.8s; }
+        
+        /* Chat list */
+        .chat-list {
+            list-style: none;
+        }
+        
+        .chat-list-item {
+            padding: 1rem;
+            border-bottom: 1px solid var(--gray-dark);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border-radius: var(--border-radius);
+        }
+        
+        .chat-list-item:hover {
+            background-color: var(--gray);
+        }
+        
+        .chat-list-item.active {
+            background-color: var(--primary-light);
+            border-left: 3px solid var(--primary);
+        }
+        
+        .chat-info {
+            flex-grow: 1;
+            min-width: 0;
+        }
+        
+        .chat-name {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: var(--dark);
+        }
+        
+        .chat-preview {
+            color: var(--darker);
+            font-size: 0.9rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .chat-time {
+            color: var(--darker);
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+        
+        .unread-count {
+            background: var(--primary);
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        
+        /* Group creation modal */
+        .group-form {
+            display: grid;
+            gap: 1rem;
+        }
+        
+        .member-list {
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid var(--gray-dark);
+            border-radius: var(--border-radius);
+            padding: 0.5rem;
+        }
+        
+        .member-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+        
+        .member-item:hover {
+            background: var(--gray);
+        }
+        
+        .member-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        /* Responsive */
+        @media (min-width: 768px) {
+            .mobile-only {
+                display: none;
+            }
+            
+            .desktop-only {
+                display: block;
+            }
+            
+            .dashboard {
+                grid-template-columns: var(--sidebar-width) 1fr;
+            }
+            
+            .sidebar {
+                display: block;
+                background: white;
+                border-radius: var(--border-radius);
+                box-shadow: var(--shadow-sm);
+                padding: 1.25rem;
+                height: fit-content;
+                border: 1px solid var(--gray-dark);
+            }
+            
+            .header {
+                padding: 0 1.5rem;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            .logo-icon {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 0 1.5rem;
+                padding-top: calc(var(--header-height) + 1.5rem);
+            }
+            
+            .chat-container {
+                height: 65vh;
+            }
+        }
+        
+        @media (max-width: 1024px) {
+            .dashboard {
+                grid-template-columns: 240px 1fr;
+                gap: 1rem;
+            }
+            
+            .sidebar {
+                padding: 1rem;
+            }
+            
+            .main-content {
+                padding: 1.25rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                order: 2;
+            }
+            
+            .header {
+                padding: 0 1rem;
+            }
+            
+            .logo {
+                font-size: 1.3rem;
+            }
+            
+            .welcome-message h3 {
+                font-size: 1.3rem;
+            }
+            
+            .welcome-message p {
+                font-size: 0.95rem;
+            }
+            
+            .card-header h2 {
+                font-size: 1.3rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .profile-card {
+                padding: 1rem;
+            }
+            
+            .nav-link {
+                padding: 0.75rem;
+            }
+            
+            .message-detail-title {
+                font-size: 1.3rem;
+            }
+            
+            .message-detail-body {
+                font-size: 0.95rem;
+            }
+            
+            .compose-actions {
+                flex-direction: column;
+            }
+            
+            .compose-actions .btn {
+                width: 100%;
+                margin-bottom: 0.5rem;
+            }
+            
+            .modal-content {
+                width: 95%;
+                margin: 0 auto;
+            }
+            
+            .profile-info-item {
+                flex-direction: column;
+            }
+            
+            .profile-info-label {
+                width: 100%;
+                margin-bottom: 0.5rem;
+            }
+            
+            .chat-container {
+                height: 60vh;
+            }
+            
+            .message {
+                max-width: 90%;
+            }
+            
+            .emoji-picker {
+                grid-template-columns: repeat(6, 1fr);
+                max-width: 250px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 0.5rem;
+                padding-top: calc(var(--header-height) + 0.5rem);
+            }
+            
+            .auth-container {
+                margin: 1rem auto;
+            }
+            
+            .card-header, .card-body {
+                padding: 1rem;
+            }
+            
+            .btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .form-control {
+                padding: 0.75rem;
+            }
+            
+            .profile-avatar {
+                width: 70px;
+                height: 70px;
+                font-size: 1.8rem;
+            }
+            
+            .profile-name {
+                font-size: 1.2rem;
+            }
+            
+            .message-item {
+                padding: 0.875rem;
+            }
+            
+            .message-avatar {
+                width: 36px;
+                height: 36px;
+                font-size: 0.9rem;
+            }
+            
+            .message-sender {
+                font-size: 0.95rem;
+            }
+            
+            .message-subject {
+                font-size: 0.95rem;
+            }
+            
+            .message-detail {
+                padding: 1rem;
+            }
+            
+            .message-detail-title {
+                font-size: 1.2rem;
+            }
+            
+            .message-detail-meta {
+                font-size: 0.8rem;
+            }
+            
+            .message-actions {
+                flex-direction: column;
+            }
+            
+            .chat-container {
+                height: 55vh;
+            }
+            
+            .emoji-picker {
+                grid-template-columns: repeat(5, 1fr);
+                max-width: 200px;
+            }
+        }
+        
+        /* Animations */
+        @keyframes slideIn {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+        
+        .slide-in {
+            animation: slideIn 0.3s ease-out forwards;
+        }
+        
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .badge-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .badge-secondary {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        /* Utility Classes */
+        .hidden {
+            display: none !important;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .flex {
+            display: flex;
+        }
+        
+        .justify-between {
+            justify-content: space-between;
+        }
+        
+        .items-center {
+            align-items: center;
+        }
+        
+        .mt-2 { margin-top: 0.5rem; }
+        .mt-3 { margin-top: 0.75rem; }
+        .mt-4 { margin-top: 1rem; }
+        .mt-5 { margin-top: 1.5rem; }
+        
+        .mb-2 { margin-bottom: 0.5rem; }
+        .mb-3 { margin-bottom: 0.75rem; }
+        .mb-4 { margin-bottom: 1rem; }
+        .mb-5 { margin-bottom: 1.5rem; }
+        
+        .w-full { width: 100%; }
+        
+        .ml-auto { margin-left: auto; }
+        .ml-2 { margin-left: 0.5rem; }
+        
+        /* Password strength colors */
+        .strength-0 { width: 20%; background: #ff4d4d; }
+        .strength-1 { width: 40%; background: #ff8c1a; }
+        .strength-2 { width: 60%; background: #ffcc00; }
+        .strength-3 { width: 80%; background: #66cc66; }
+        .strength-4 { width: 100%; background: #00b300; }
+        
+        /* Security indicator */
+        .security-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            background: rgba(52, 168, 83, 0.1);
+            padding: 0.75rem;
+            border-radius: var(--border-radius-sm);
+            border-left: 3px solid var(--success);
+        }
+        
+        .security-icon {
+            color: var(--success);
+            font-size: 1.1rem;
+        }
+        
+        /* Alert */
+        .alert {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem 1.25rem;
+            border-radius: var(--border-radius);
+            font-size: 0.95rem;
+            z-index: 1000;
+            box-shadow: var(--shadow-md);
+            animation: fadeIn 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .alert-error {
+            background-color: rgba(253, 237, 237, 0.95);
+            color: #d32f2f;
+            border-left: 4px solid var(--error);
+        }
+        
+        .alert-success {
+            background-color: rgba(237, 247, 237, 0.95);
+            color: #2e7d32;
+            border-left: 4px solid var(--success);
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #c5c5c5;
+            border-radius: 3px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+        
+        /* Content section */
+        .content-section {
+            margin-bottom: 2rem;
+        }
+        
+        .section-title {
+            font-family: var(--font-main);
+            font-size: 1.4rem;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 600;
+        }
+        
+        /* Profile card enhancements */
+        .profile-card {
+            text-align: center;
+            padding: 1.5rem 1rem;
+        }
+        
+        .profile-name {
+            font-family: var(--font-main);
+            font-size: 1.4rem;
+            color: var(--dark);
+            margin-bottom: 0.25rem;
+            font-weight: 600;
+        }
+        
+        .profile-email {
+            color: var(--darker);
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+        }
+        
+        .profile-desc {
+            color: var(--darker);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        /* Invitations Tab */
+        #invitations-tab {
+            padding: 1rem 0;
+        }
+        
+        .invitation-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow-sm);
+            border-left: 4px solid var(--primary);
+        }
+        
+        .invitation-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .invitation-title {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .invitation-date {
+            font-size: 0.8rem;
+            color: var(--darker);
+        }
+        
+        .invitation-message {
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .invitation-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loading-screen">
+        <div class="loading-logo">
+            <i class="fas fa-envelope-open-text logo-icon"></i>
+            <span>Hexa Mail</span>
+        </div>
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Loading your secure mailbox...</div>
+    </div>
+    
+    <!-- Header -->
+    <header class="header">
+        <div class="mobile-only">
+            <button class="mobile-menu-btn" id="mobile-menu-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        
+        <div class="logo">
+            <i class="fas fa-envelope-open-text logo-icon"></i>
+            <span>Hexa Mail</span>
+        </div>
+        
+        <div class="header-actions" id="header-actions">
+            <!-- Dynamically filled -->
+        </div>
+    </header>
+    
+    <!-- Mobile Sidebar -->
+    <div class="mobile-sidebar" id="mobile-sidebar">
+        <!-- Profile Card -->
+        <div class="profile-card">
+            <div class="profile-photo-upload" id="mobile-profile-photo-upload">
+                <div class="profile-photo-preview" id="mobile-profile-photo-preview">
+                    <!-- Initials will be shown if no photo -->
+                </div>
+                <input type="file" id="mobile-profile-photo-input" accept="image/*">
+                <div class="profile-photo-edit">
+                    <i class="fas fa-camera"></i>
+                </div>
+            </div>
+            <h3 class="profile-name" id="mobile-profile-name"></h3>
+            <div class="profile-email" id="mobile-profile-email"></div>
+            <p class="profile-desc" id="mobile-profile-desc"></p>
+            <button id="mobile-view-profile-btn" class="btn btn-outline">
+                <i class="fas fa-user-edit"></i> View Profile
+            </button>
+        </div>
+        
+        <!-- Navigation -->
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="#" class="nav-link active" data-tab="inbox">
+                    <i class="fas fa-inbox"></i>
+                    <span>Inbox</span>
+                    <span class="badge badge-primary ml-auto" id="mobile-inbox-count">0</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link" data-tab="compose">
+                    <i class="fas fa-pen"></i>
+                    <span>Compose</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link" data-tab="chat">
+                    <i class="fas fa-comments"></i>
+                    <span>Live Chat</span>
+                    <span class="badge badge-primary ml-auto" id="mobile-chat-count">0</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link" data-tab="sent">
+                    <i class="fas fa-paper-plane"></i>
+                    <span>Sent</span>
+                    <span class="badge badge-secondary ml-auto" id="mobile-sent-count">0</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link" data-tab="invitations">
+                    <i class="fas fa-envelope"></i>
+                    <span>Invitations</span>
+                    <span class="badge badge-primary ml-auto" id="mobile-invitations-count">0</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link" data-tab="profile">
+                    <i class="fas fa-user-cog"></i>
+                    <span>Profile Settings</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <button id="mobile-logout-btn" class="btn btn-outline w-full mt-4">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </li>
+        </ul>
+    </div>
+    
+    <div class="mobile-sidebar-overlay" id="mobile-sidebar-overlay"></div>
+    
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Login/Signup Card -->
+        <div id="auth-container" class="auth-container">
+            <div class="card">
+                <div class="card-header">
+                    <h2 id="auth-title">Welcome to Hexa Mail</h2>
+                </div>
+                <div class="card-body">
+                    <!-- Login Form -->
+                    <form id="login-form">
+                        <div class="form-group">
+                            <label for="login-email" class="form-label">Your Email</label>
+                            <input type="email" id="login-email" class="form-control" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password" class="form-label">Password</label>
+                            <input type="password" id="login-password" class="form-control" placeholder="Enter your password" required>
+                            <i class="fas fa-eye password-toggle" id="toggle-login-password"></i>
+                        </div>
+                        <button type="submit" id="login-btn" class="btn btn-primary w-full">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </button>
+                        <div class="auth-switch mt-4">
+                            <p>Don't have an account? <button type="button" id="show-create-account" class="btn-text">Create one</button></p>
+                        </div>
+                    </form>
+                    
+                    <!-- Create Account Form -->
+                    <form id="create-account-form" class="hidden">
+                        <div class="form-group">
+                            <label for="create-name" class="form-label">Your Name</label>
+                            <input type="text" id="create-name" class="form-control" placeholder="Enter your full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="create-email" class="form-label">Your Email</label>
+                            <input type="email" id="create-email" class="form-control" placeholder="username@hexamail.com" required>
+                            <div class="form-text">Your Hexa Mail email address</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="create-password" class="form-label">Password</label>
+                            <input type="password" id="create-password" class="form-control" placeholder="Create a strong password" required>
+                            <i class="fas fa-eye password-toggle" id="toggle-create-password"></i>
+                            <div class="password-strength">
+                                <div class="password-strength-bar" id="password-strength-bar"></div>
+                            </div>
+                            <div id="password-strength-text" class="form-text">Password strength: weak</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="create-confirm-password" class="form-label">Confirm Password</label>
+                            <input type="password" id="create-confirm-password" class="form-control" placeholder="Confirm your password" required>
+                            <i class="fas fa-eye password-toggle" id="toggle-confirm-password"></i>
+                        </div>
+                        <div class="form-group">
+                            <label for="create-country" class="form-label">Country</label>
+                            <input type="text" id="create-country" class="form-control" placeholder="Enter your country" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="create-desc" class="form-label">Short Description</label>
+                            <textarea id="create-desc" class="form-control" rows="3" placeholder="Tell us something about yourself"></textarea>
+                        </div>
+                        <div class="security-indicator">
+                            <i class="fas fa-shield-alt security-icon"></i>
+                            <span>All your data is securely encrypted</span>
+                        </div>
+                        <button type="submit" id="create-account-btn" class="btn btn-primary w-full">
+                            <i class="fas fa-user-plus"></i> Create Account
+                        </button>
+                        <div class="auth-switch mt-4">
+                            <p>Already have an account? <button type="button" id="show-login" class="btn-text">Login here</button></p>
+                        </div>
+                    </form>
+                    
+                    <!-- Account Created Success -->
+                    <div id="account-created" class="hidden">
+                        <div class="text-center">
+                            <i class="fas fa-check-circle" style="font-size: 3rem; color: var(--success); margin-bottom: 1rem;"></i>
+                            <h3 style="font-family: var(--font-main); margin-bottom: 1rem; font-weight: 600;">Account Created Successfully!</h3>
+                            <div class="uid-display" style="background-color: var(--gray); padding: 1rem; border-radius: var(--border-radius); font-family: monospace; font-size: 1.1rem; margin-bottom: 1.5rem;">
+                                Your Email: <span id="generated-email" style="font-weight: 700; color: var(--primary);"></span>
+                            </div>
+                            <p class="mb-4">Your account is now secure with your password. Welcome to Hexa Mail!</p>
+                            <button id="proceed-to-login" class="btn btn-primary">
+                                <i class="fas fa-sign-in-alt"></i> Continue to Login
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Dashboard -->
+        <div id="dashboard" class="hidden">
+            <!-- Welcome Message -->
+            <div class="welcome-message" id="welcome-message">
+                <!-- Filled dynamically -->
+            </div>
+            
+            <div class="dashboard">
+                <!-- Desktop Sidebar -->
+                <div class="sidebar desktop-only">
+                    <!-- Profile Card -->
+                    <div class="profile-card">
+                        <div class="profile-photo-upload" id="profile-photo-upload">
+                            <div class="profile-photo-preview" id="profile-photo-preview">
+                                <!-- Initials will be shown if no photo -->
+                            </div>
+                            <input type="file" id="profile-photo-input" accept="image/*">
+                            <div class="profile-photo-edit">
+                                <i class="fas fa-camera"></i>
+                            </div>
+                        </div>
+                        <h3 class="profile-name" id="profile-name"></h3>
+                        <div class="profile-email" id="profile-email"></div>
+                        <p class="profile-desc" id="profile-desc"></p>
+                        <button id="view-profile-btn" class="btn btn-outline">
+                            <i class="fas fa-user-edit"></i> View Profile
+                        </button>
+                    </div>
+                    
+                    <!-- Navigation -->
+                    <ul class="nav-menu">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link active" data-tab="inbox">
+                                <i class="fas fa-inbox"></i>
+                                <span>Inbox</span>
+                                <span class="badge badge-primary ml-auto" id="inbox-count">0</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-tab="compose">
+                                <i class="fas fa-pen"></i>
+                                <span>Compose</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-tab="chat">
+                                <i class="fas fa-comments"></i>
+                                <span>Live Chat</span>
+                                <span class="badge badge-primary ml-auto" id="chat-count">0</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-tab="sent">
+                                <i class="fas fa-paper-plane"></i>
+                                <span>Sent</span>
+                                <span class="badge badge-secondary ml-auto" id="sent-count">0</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-tab="invitations">
+                                <i class="fas fa-envelope"></i>
+                                <span>Invitations</span>
+                                <span class="badge badge-primary ml-auto" id="invitations-count">0</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-tab="profile">
+                                <i class="fas fa-user-cog"></i>
+                                <span>Profile Settings</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Main Content -->
+                <div class="main-content">
+                    <!-- Inbox Tab -->
+                    <div id="inbox-tab">
+                        <div class="flex justify-between items-center mb-4">
+                            <h2 class="section-title">
+                                <i class="fas fa-inbox"></i> Inbox
+                            </h2>
+                            <button id="refresh-inbox" class="btn-icon">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
+                        </div>
+                        
+                        <ul class="message-list" id="inbox-messages">
+                            <!-- Filled dynamically -->
+                        </ul>
+                    </div>
+                    
+                    <!-- Compose Tab -->
+                    <div id="compose-tab" class="hidden">
+                        <h2 class="section-title">
+                            <i class="fas fa-pen"></i> Compose Message
+                        </h2>
+                        
+                        <form class="compose-form" id="compose-form">
+                            <div class="form-group">
+                                <label for="recipient-email" class="form-label">Recipient Email</label>
+                                <input type="email" id="recipient-email" class="form-control" placeholder="Enter recipient's email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message-subject" class="form-label">Subject</label>
+                                <input type="text" id="message-subject" class="form-control" placeholder="Enter message subject" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message-content" class="form-label">Message</label>
+                                <textarea id="message-content" class="form-control" rows="10" placeholder="Type your message here..." required></textarea>
+                            </div>
+                            <div class="compose-actions">
+                                <button type="reset" class="btn btn-outline">
+                                    <i class="fas fa-trash"></i> Discard
+                                </button>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-paper-plane"></i> Send Message
+                                </button>
+                            </div>
+                        </form>
+                        
+                        <div id="send-confirmation" class="hidden" style="background-color: var(--success); color: white; padding: 1rem; border-radius: var(--border-radius); margin-top: 1.5rem; animation: fadeIn 0.3s;">
+                            <!-- Filled dynamically -->
+                        </div>
+                    </div>
+                    
+                    <!-- Chat Tab -->
+                    <div id="chat-tab" class="hidden">
+                        <div class="flex justify-between items-center mb-4">
+                            <h2 class="section-title">
+                                <i class="fas fa-comments"></i> Live Chat
+                            </h2>
+                            <div>
+                                <button id="new-chat-btn" class="btn btn-primary">
+                                    <i class="fas fa-plus"></i> New Chat
+                                </button>
+                                <button id="new-group-btn" class="btn btn-secondary ml-2">
+                                    <i class="fas fa-users"></i> New Group
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="chat-container" id="chat-container">
+                            <div class="chat-header">
+                                <h3 class="chat-title" id="current-chat-title">Select a conversation</h3>
+                                <div class="chat-actions">
+                                    <button class="btn-icon" id="clear-chat-btn" title="Clear Chat">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                    <button class="btn-icon" id="chat-info-btn" title="Chat Info">
+                                        <i class="fas fa-info-circle"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="chat-messages" id="chat-messages">
+                                <div class="empty-state">
+                                    <i class="fas fa-comments"></i>
+                                    <h3>No conversation selected</h3>
+                                    <p>Select a chat from the list or start a new one</p>
+                                </div>
+                            </div>
+                            <div class="chat-input-container">
+                                <button class="emoji-btn" id="emoji-btn">
+                                    <i class="fas fa-smile"></i>
+                                </button>
+                                <div class="emoji-picker hidden" id="emoji-picker">
+                                    <!-- Emojis will be populated by JavaScript -->
+                                </div>
+                                <textarea class="chat-input" id="chat-input" placeholder="Type a message..." rows="1"></textarea>
+                                <button class="voice-btn" id="voice-btn">
+                                    <i class="fas fa-microphone"></i>
+                                </button>
+                                <div class="voice-recorder hidden" id="voice-recorder">
+                                    <div class="voice-timer" id="voice-timer">00:00</div>
+                                    <button class="voice-action-btn voice-stop" id="voice-stop-btn">Stop Recording</button>
+                                </div>
+                                <button class="send-btn" id="send-chat-btn">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <h3 class="section-title">
+                                <i class="fas fa-comment"></i> Your Conversations
+                            </h3>
+                            <ul class="chat-list" id="chat-list">
+                                <!-- Filled dynamically -->
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Sent Tab -->
+                    <div id="sent-tab" class="hidden">
+                        <h2 class="section-title">
+                            <i class="fas fa-paper-plane"></i> Sent Messages
+                        </h2>
+                        
+                        <ul class="message-list" id="sent-messages">
+                            <!-- Filled dynamically -->
+                        </ul>
+                    </div>
+                    
+                    <!-- Invitations Tab -->
+                    <div id="invitations-tab" class="hidden">
+                        <h2 class="section-title">
+                            <i class="fas fa-envelope"></i> Invitations
+                        </h2>
+                        
+                        <div id="invitations-list">
+                            <!-- Filled dynamically -->
+                        </div>
+                    </div>
+                    
+                    <!-- Profile Tab -->
+                    <div id="profile-tab" class="hidden">
+                        <h2 class="section-title">
+                            <i class="fas fa-user-cog"></i> Profile Settings
+                        </h2>
+                        
+                        <form id="profile-form">
+                            <div class="form-group">
+                                <label for="edit-name" class="form-label">Your Name</label>
+                                <input type="text" id="edit-name" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-country" class="form-label">Country</label>
+                                <input type="text" id="edit-country" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-desc" class="form-label">Description</label>
+                                <textarea id="edit-desc" class="form-control" rows="4"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Your Email</label>
+                                <div style="background-color: var(--gray); padding: 0.75rem; border-radius: var(--border-radius); font-family: monospace; font-weight: 600;" id="profile-email-display"></div>
+                                <div class="form-text">This is your unique email address. You cannot change it.</div>
+                            </div>
+                            <div class="compose-actions">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save"></i> Save Changes
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- User Profile Modal -->
+    <div class="modal" id="user-profile-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>User Profile</h3>
+                <button class="btn-icon" id="close-profile-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center mb-4">
+                    <div class="profile-photo-preview" id="modal-profile-photo" style="width: 100px; height: 100px; font-size: 2.5rem; margin: 0 auto 1rem;">
+                        <!-- Filled dynamically -->
+                    </div>
+                    <h3 style="font-family: var(--font-main); font-weight: 600;" id="modal-name"></h3>
+                    <div id="modal-email-container" style="margin-bottom: 1rem;">
+                        <span class="profile-email" id="modal-email"></span>
+                    </div>
+                </div>
+                
+                <div class="profile-info">
+                    <div class="profile-info-item">
+                        <div class="profile-info-label">Country:</div>
+                        <div class="profile-info-value" id="modal-country"></div>
+                    </div>
+                    <div class="profile-info-item">
+                        <div class="profile-info-label">About:</div>
+                        <div class="profile-info-value" id="modal-desc"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- New Chat Modal -->
+    <div class="modal" id="new-chat-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Start a New Chat</h3>
+                <button class="btn-icon" id="close-new-chat-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="search-user" class="form-label">Search Users</label>
+                    <input type="text" id="search-user" class="form-control" placeholder="Search by name or email">
+                </div>
+                <div class="member-list" id="user-list">
+                    <!-- Filled dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- New Group Modal -->
+    <div class="modal" id="new-group-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Create a New Group</h3>
+                <button class="btn-icon" id="close-new-group-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="group-form" id="group-form">
+                    <div class="form-group">
+                        <label for="group-name" class="form-label">Group Name</label>
+                        <input type="text" id="group-name" class="form-control" placeholder="Enter group name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="group-desc" class="form-label">Group Description</label>
+                        <textarea id="group-desc" class="form-control" rows="3" placeholder="Enter group description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Select Members</label>
+                        <input type="text" id="search-member" class="form-control" placeholder="Search users to add">
+                        <div class="member-list" id="member-list">
+                            <!-- Filled dynamically -->
+                        </div>
+                    </div>
+                    <div class="compose-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-users"></i> Create Group
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Group Info Modal -->
+    <div class="modal" id="group-info-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="group-info-title">Group Info</h3>
+                <button class="btn-icon" id="close-group-info-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center mb-4">
+                    <div class="profile-photo-preview" id="group-icon" style="width: 80px; height: 80px; font-size: 2rem; margin: 0 auto 1rem; background: var(--primary);">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 style="font-family: var(--font-main); font-weight: 600;" id="group-info-name"></h3>
+                    <p id="group-info-desc" style="color: var(--darker);"></p>
+                </div>
+                
+                <div class="content-section">
+                    <h4 class="section-title" style="font-size: 1.1rem;">
+                        <i class="fas fa-users"></i> Members
+                    </h4>
+                    <div id="group-members-list">
+                        <!-- Filled dynamically -->
+                    </div>
+                </div>
+                
+                <div class="content-section">
+                    <h4 class="section-title" style="font-size: 1.1rem;">
+                        <i class="fas fa-user-plus"></i> Add Members
+                    </h4>
+                    <div class="form-group">
+                        <input type="text" id="add-member-input" class="form-control" placeholder="Search users to add">
+                    </div>
+                    <div id="add-member-results">
+                        <!-- Filled dynamically -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Show loading screen initially
+            const loadingScreen = document.getElementById('loading-screen');
+            
+            // Simulate loading process
+            setTimeout(() => {
+                loadingScreen.style.opacity = '0';
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                }, 500);
+            }, 2000);
+            
+            // DOM Elements
+            const authContainer = document.getElementById('auth-container');
+            const dashboard = document.getElementById('dashboard');
+            const headerActions = document.getElementById('header-actions');
+            const welcomeMessage = document.getElementById('welcome-message');
+            
+            // Mobile elements
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileSidebar = document.getElementById('mobile-sidebar');
+            const mobileSidebarOverlay = document.getElementById('mobile-sidebar-overlay');
+            const mobileLogoutBtn = document.getElementById('mobile-logout-btn');
+            
+            // Auth Forms
+            const loginForm = document.getElementById('login-form');
+            const createAccountForm = document.getElementById('create-account-form');
+            const accountCreated = document.getElementById('account-created');
+            const authTitle = document.getElementById('auth-title');
+            
+            // Login Form
+            const loginEmail = document.getElementById('login-email');
+            const loginPassword = document.getElementById('login-password');
+            const toggleLoginPassword = document.getElementById('toggle-login-password');
+            const loginBtn = document.getElementById('login-btn');
+            const showCreateAccount = document.getElementById('show-create-account');
+            
+            // Create Account Form
+            const createName = document.getElementById('create-name');
+            const createEmail = document.getElementById('create-email');
+            const createPassword = document.getElementById('create-password');
+            const toggleCreatePassword = document.getElementById('toggle-create-password');
+            const createConfirmPassword = document.getElementById('create-confirm-password');
+            const toggleConfirmPassword = document.getElementById('toggle-confirm-password');
+            const createCountry = document.getElementById('create-country');
+            const createDesc = document.getElementById('create-desc');
+            const createAccountBtn = document.getElementById('create-account-btn');
+            const generatedEmail = document.getElementById('generated-email');
+            const proceedToLogin = document.getElementById('proceed-to-login');
+            const showLogin = document.getElementById('show-login');
+            const passwordStrengthBar = document.getElementById('password-strength-bar');
+            const passwordStrengthText = document.getElementById('password-strength-text');
+            
+            // Dashboard Elements
+            const sidebarLinks = document.querySelectorAll('.nav-link');
+            const inboxTab = document.getElementById('inbox-tab');
+            const composeTab = document.getElementById('compose-tab');
+            const chatTab = document.getElementById('chat-tab');
+            const sentTab = document.getElementById('sent-tab');
+            const invitationsTab = document.getElementById('invitations-tab');
+            const profileTab = document.getElementById('profile-tab');
+            const inboxMessages = document.getElementById('inbox-messages');
+            const sentMessages = document.getElementById('sent-messages');
+            const refreshInbox = document.getElementById('refresh-inbox');
+            
+            // Profile Elements
+            const profilePhotoUpload = document.getElementById('profile-photo-upload');
+            const profilePhotoPreview = document.getElementById('profile-photo-preview');
+            const profilePhotoInput = document.getElementById('profile-photo-input');
+            const profileName = document.getElementById('profile-name');
+            const profileEmail = document.getElementById('profile-email');
+            const profileDesc = document.getElementById('profile-desc');
+            const viewProfileBtn = document.getElementById('view-profile-btn');
+            const profileForm = document.getElementById('profile-form');
+            const editName = document.getElementById('edit-name');
+            const editCountry = document.getElementById('edit-country');
+            const editDesc = document.getElementById('edit-desc');
+            const profileEmailDisplay = document.getElementById('profile-email-display');
+            
+            // Mobile Profile Elements
+            const mobileProfilePhotoUpload = document.getElementById('mobile-profile-photo-upload');
+            const mobileProfilePhotoPreview = document.getElementById('mobile-profile-photo-preview');
+            const mobileProfilePhotoInput = document.getElementById('mobile-profile-photo-input');
+            const mobileProfileName = document.getElementById('mobile-profile-name');
+            const mobileProfileEmail = document.getElementById('mobile-profile-email');
+            const mobileProfileDesc = document.getElementById('mobile-profile-desc');
+            const mobileViewProfileBtn = document.getElementById('mobile-view-profile-btn');
+            
+            // Compose Form
+            const composeForm = document.getElementById('compose-form');
+            const recipientEmail = document.getElementById('recipient-email');
+            const messageSubject = document.getElementById('message-subject');
+            const messageContent = document.getElementById('message-content');
+            const sendConfirmation = document.getElementById('send-confirmation');
+            
+            // Invitations
+            const invitationsList = document.getElementById('invitations-list');
+            
+            // Modal Elements
+            const userProfileModal = document.getElementById('user-profile-modal');
+            const closeProfileModal = document.getElementById('close-profile-modal');
+            const modalProfilePhoto = document.getElementById('modal-profile-photo');
+            const modalName = document.getElementById('modal-name');
+            const modalEmail = document.getElementById('modal-email');
+            const modalEmailContainer = document.getElementById('modal-email-container');
+            const modalCountry = document.getElementById('modal-country');
+            const modalDesc = document.getElementById('modal-desc');
+            
+            // Chat Elements
+            const newChatBtn = document.getElementById('new-chat-btn');
+            const newGroupBtn = document.getElementById('new-group-btn');
+            const chatContainer = document.getElementById('chat-container');
+            const currentChatTitle = document.getElementById('current-chat-title');
+            const chatMessages = document.getElementById('chat-messages');
+            const chatInput = document.getElementById('chat-input');
+            const emojiBtn = document.getElementById('emoji-btn');
+            const emojiPicker = document.getElementById('emoji-picker');
+            const voiceBtn = document.getElementById('voice-btn');
+            const voiceRecorder = document.getElementById('voice-recorder');
+            const voiceTimer = document.getElementById('voice-timer');
+            const voiceStopBtn = document.getElementById('voice-stop-btn');
+            const sendChatBtn = document.getElementById('send-chat-btn');
+            const chatList = document.getElementById('chat-list');
+            const clearChatBtn = document.getElementById('clear-chat-btn');
+            const chatInfoBtn = document.getElementById('chat-info-btn');
+            
+            // Chat Modals
+            const newChatModal = document.getElementById('new-chat-modal');
+            const closeNewChatModal = document.getElementById('close-new-chat-modal');
+            const searchUser = document.getElementById('search-user');
+            const userList = document.getElementById('user-list');
+            
+            const newGroupModal = document.getElementById('new-group-modal');
+            const closeNewGroupModal = document.getElementById('close-new-group-modal');
+            const groupForm = document.getElementById('group-form');
+            const groupName = document.getElementById('group-name');
+            const groupDesc = document.getElementById('group-desc');
+            const searchMember = document.getElementById('search-member');
+            const memberList = document.getElementById('member-list');
+            
+            const groupInfoModal = document.getElementById('group-info-modal');
+            const closeGroupInfoModal = document.getElementById('close-group-info-modal');
+            const groupInfoTitle = document.getElementById('group-info-title');
+            const groupInfoName = document.getElementById('group-info-name');
+            const groupInfoDesc = document.getElementById('group-info-desc');
+            const groupMembersList = document.getElementById('group-members-list');
+            const addMemberInput = document.getElementById('add-member-input');
+            const addMemberResults = document.getElementById('add-member-results');
+            
+            // State
+            let currentUser = null;
+            let messages = [];
+            let sentMessagesData = [];
+            let invitations = [];
+            let checkMessagesInterval = null;
+            let currentViewingProfile = null;
+            
+            // Chat State
+            let chats = [];
+            let currentChat = null;
+            let groups = [];
+            let currentGroup = null;
+            let voiceRecorderActive = false;
+            let mediaRecorder = null;
+            let audioChunks = [];
+            let recordingTimer = null;
+            let recordingSeconds = 0;
+            
+            // Emoji list
+            const emojis = ['😀', '😃', '😄', '😁', '😆', '😅', '😂', '🤣', '😊', '😇', '🙂', '🙃', '😉', '😌', '😍', '🥰', '😘', '😗', '😙', '😚', '😋', '😛', '😝', '😜', '🤪', '🤨', '🧐', '🤓', '😎', '🤩', '🥳', '😏', '😒', '😞', '😔', '😟', '😕', '🙁', '☹️', '😣'];
+            
+            // Initialize
+            checkAuthState();
+            setupEventListeners();
+            populateEmojiPicker();
+            
+            function setupEventListeners() {
+                // Mobile menu
+                mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+                mobileSidebarOverlay.addEventListener('click', closeMobileMenu);
+                mobileLogoutBtn.addEventListener('click', logout);
+                
+                // Auth Forms
+                showCreateAccount.addEventListener('click', showCreateAccountForm);
+                showLogin.addEventListener('click', showLoginForm);
+                loginForm.addEventListener('submit', handleLogin);
+                createAccountForm.addEventListener('submit', createAccount);
+                proceedToLogin.addEventListener('click', () => {
+                    showLoginForm();
+                    loginEmail.value = createEmail.value;
+                });
+                
+                // Password toggle
+                toggleLoginPassword.addEventListener('click', () => togglePasswordVisibility(loginPassword, toggleLoginPassword));
+                toggleCreatePassword.addEventListener('click', () => togglePasswordVisibility(createPassword, toggleCreatePassword));
+                toggleConfirmPassword.addEventListener('click', () => togglePasswordVisibility(createConfirmPassword, toggleConfirmPassword));
+                
+                // Password strength
+                createPassword.addEventListener('input', checkPasswordStrength);
+                
+                // Dashboard Navigation
+                sidebarLinks.forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const tab = link.getAttribute('data-tab');
+                        switchTab(tab);
+                        
+                        // Update active state
+                        sidebarLinks.forEach(l => l.classList.remove('active'));
+                        link.classList.add('active');
+                        
+                        // Close mobile menu after selection
+                        closeMobileMenu();
+                    });
+                });
+                
+                // Message Actions
+                refreshInbox.addEventListener('click', loadMessages);
+                composeForm.addEventListener('submit', sendMessage);
+                
+                // Profile Actions
+                profilePhotoInput.addEventListener('change', handleProfilePhotoUpload);
+                mobileProfilePhotoInput.addEventListener('change', handleProfilePhotoUpload);
+                viewProfileBtn.addEventListener('click', showCurrentUserProfile);
+                mobileViewProfileBtn.addEventListener('click', showCurrentUserProfile);
+                profileForm.addEventListener('submit', updateProfile);
+                
+                // Modal Actions
+                closeProfileModal.addEventListener('click', () => {
+                    userProfileModal.classList.remove('active');
+                });
+                
+                // Close modal when clicking outside
+                userProfileModal.addEventListener('click', (e) => {
+                    if (e.target === userProfileModal) {
+                        userProfileModal.classList.remove('active');
+                    }
+                });
+                
+                // Chat Actions
+                newChatBtn.addEventListener('click', () => {
+                    newChatModal.classList.add('active');
+                    loadUserList();
+                });
+                
+                newGroupBtn.addEventListener('click', () => {
+                    newGroupModal.classList.add('active');
+                    loadMemberList();
+                });
+                
+                closeNewChatModal.addEventListener('click', () => {
+                    newChatModal.classList.remove('active');
+                });
+                
+                closeNewGroupModal.addEventListener('click', () => {
+                    newGroupModal.classList.remove('active');
+                });
+                
+                closeGroupInfoModal.addEventListener('click', () => {
+                    groupInfoModal.classList.remove('active');
+                });
+                
+                // Close modals when clicking outside
+                newChatModal.addEventListener('click', (e) => {
+                    if (e.target === newChatModal) {
+                        newChatModal.classList.remove('active');
+                    }
+                });
+                
+                newGroupModal.addEventListener('click', (e) => {
+                    if (e.target === newGroupModal) {
+                        newGroupModal.classList.remove('active');
+                    }
+                });
+                
+                groupInfoModal.addEventListener('click', (e) => {
+                    if (e.target === groupInfoModal) {
+                        groupInfoModal.classList.remove('active');
+                    }
+                });
+                
+                // Chat input actions
+                emojiBtn.addEventListener('click', toggleEmojiPicker);
+                voiceBtn.addEventListener('click', toggleVoiceRecorder);
+                voiceStopBtn.addEventListener('click', stopVoiceRecording);
+                sendChatBtn.addEventListener('click', sendChatMessage);
+                chatInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        sendChatMessage();
+                    }
+                });
+                
+                clearChatBtn.addEventListener('click', clearChat);
+                chatInfoBtn.addEventListener('click', showChatInfo);
+                
+                // Search functionality
+                searchUser.addEventListener('input', filterUserList);
+                searchMember.addEventListener('input', filterMemberList);
+                addMemberInput.addEventListener('input', searchUsersToAdd);
+                
+                // Group form submission
+                groupForm.addEventListener('submit', createGroup);
+            }
+            
+            function toggleMobileMenu() {
+                mobileMenuBtn.classList.toggle('active');
+                mobileSidebar.classList.toggle('active');
+                mobileSidebarOverlay.classList.toggle('active');
+            }
+            
+            function closeMobileMenu() {
+                mobileMenuBtn.classList.remove('active');
+                mobileSidebar.classList.remove('active');
+                mobileSidebarOverlay.classList.remove('active');
+            }
+            
+            function togglePasswordVisibility(passwordField, toggleIcon) {
+                if (passwordField.type === 'password') {
+                    passwordField.type = 'text';
+                    toggleIcon.classList.remove('fa-eye');
+                    toggleIcon.classList.add('fa-eye-slash');
+                } else {
+                    passwordField.type = 'password';
+                    toggleIcon.classList.remove('fa-eye-slash');
+                    toggleIcon.classList.add('fa-eye');
+                }
+            }
+            
+            function checkPasswordStrength() {
+                const password = createPassword.value;
+                let strength = 0;
+                
+                // Length check
+                if (password.length >= 8) strength++;
+                if (password.length >= 12) strength++;
+                
+                // Character types
+                if (/[A-Z]/.test(password)) strength++;
+                if (/[0-9]/.test(password)) strength++;
+                if (/[^A-Za-z0-9]/.test(password)) strength++;
+                
+                // Update strength bar
+                passwordStrengthBar.className = 'password-strength-bar';
+                passwordStrengthBar.classList.add(`strength-${Math.min(strength, 4)}`);
+                
+                // Update text
+                const strengthText = ['Very Weak', 'Weak', 'Fair', 'Strong', 'Very Strong'][Math.min(strength, 4)];
+                passwordStrengthText.textContent = `Password strength: ${strengthText}`;
+            }
+            
+            function checkAuthState() {
+                const userData = JSON.parse(localStorage.getItem('hexamailUser'));
+                if (userData) {
+                    currentUser = userData;
+                    showDashboard();
+                    loadMessages();
+                    loadSentMessages();
+                    loadInvitations();
+                    startMessageChecking();
+                    updateHeader();
+                    showWelcomeMessage(true);
+                    loadProfileData();
+                    loadChats();
+                    loadGroups();
+                }
+            }
+            
+            function showCreateAccountForm(e) {
+                if (e) e.preventDefault();
+                loginForm.classList.add('hidden');
+                createAccountForm.classList.remove('hidden');
+                accountCreated.classList.add('hidden');
+                authTitle.textContent = 'Create Your Account';
+                createName.focus();
+            }
+            
+            function showLoginForm(e) {
+                if (e) e.preventDefault();
+                createAccountForm.classList.add('hidden');
+                accountCreated.classList.add('hidden');
+                loginForm.classList.remove('hidden');
+                authTitle.textContent = 'Welcome to Hexa Mail';
+                loginEmail.focus();
+            }
+            
+            function handleLogin(e) {
+                e.preventDefault();
+                
+                const email = loginEmail.value.trim();
+                const password = loginPassword.value.trim();
+                
+                if (!email || !password) {
+                    showAlert('Please enter both email and password', 'error');
+                    return;
+                }
+                
+                // Check if user exists
+                const users = JSON.parse(localStorage.getItem('hexamailUsers')) || [];
+                const user = users.find(u => u.email === email);
+                
+                if (!user) {
+                    showAlert('No account found with this email', 'error');
+                    return;
+                }
+                
+                // Check password
+                if (user.password !== password) {
+                    showAlert('Incorrect password', 'error');
+                    return;
+                }
+                
+                // Login successful
+                currentUser = user;
+                localStorage.setItem('hexamailUser', JSON.stringify(currentUser));
+                
+                showDashboard();
+                loadMessages();
+                loadSentMessages();
+                loadInvitations();
+                startMessageChecking();
+                updateHeader();
+                showWelcomeMessage(false);
+                loadProfileData();
+                loadChats();
+                loadGroups();
+            }
+            
+            function createAccount(e) {
+                e.preventDefault();
+                
+                const name = createName.value.trim();
+                const email = createEmail.value.trim();
+                const password = createPassword.value.trim();
+                const confirmPassword = createConfirmPassword.value.trim();
+                const country = createCountry.value.trim();
+                const desc = createDesc.value.trim();
+                
+                if (!name || !email || !password || !confirmPassword || !country) {
+                    showAlert('Please fill in all required fields', 'error');
+                    return;
+                }
+                
+                // Validate email
+                if (!email.endsWith('@hexamail.com')) {
+                    showAlert('Please use a @hexamail.com email address', 'error');
+                    return;
+                }
+                
+                // Check password match
+                if (password !== confirmPassword) {
+                    showAlert('Passwords do not match', 'error');
+                    return;
+                }
+                
+                // Check password strength
+                if (password.length < 8) {
+                    showAlert('Password must be at least 8 characters', 'error');
+                    return;
+                }
+                
+                // Check if email already exists
+                const users = JSON.parse(localStorage.getItem('hexamailUsers')) || [];
+                const emailExists = users.some(user => user.email === email);
+                
+                if (emailExists) {
+                    showAlert('This email is already registered', 'error');
+                    return;
+                }
+                
+                // Save user
+                const newUser = { 
+                    name, 
+                    email,
+                    password,
+                    country,
+                    desc,
+                    profilePhoto: null
+                };
+                users.push(newUser);
+                localStorage.setItem('hexamailUsers', JSON.stringify(users));
+                
+                // Initialize message storage
+                if (!localStorage.getItem(`hexamailMessages_${email}`)) {
+                    localStorage.setItem(`hexamailMessages_${email}`, JSON.stringify([]));
+                }
+                
+                // Initialize sent messages
+                if (!localStorage.getItem(`hexamailSentMessages_${email}`)) {
+                    localStorage.setItem(`hexamailSentMessages_${email}`, JSON.stringify([]));
+                }
+                
+                // Initialize invitations storage
+                if (!localStorage.getItem(`hexamailInvitations_${email}`)) {
+                    localStorage.setItem(`hexamailInvitations_${email}`, JSON.stringify([]));
+                }
+                
+                // Initialize chats storage
+                if (!localStorage.getItem(`hexamailChats_${email}`)) {
+                    localStorage.setItem(`hexamailChats_${email}`, JSON.stringify([]));
+                }
+                
+                // Initialize groups storage
+                if (!localStorage.getItem(`hexamailGroups_${email}`)) {
+                    localStorage.setItem(`hexamailGroups_${email}`, JSON.stringify([]));
+                }
+                
+                // Display email
+                generatedEmail.textContent = email;
+                
+                // Show success
+                accountCreated.classList.remove('hidden');
+                createAccountForm.classList.add('hidden');
+                
+                // Pre-fill login form for convenience
+                loginEmail.value = email;
+            }
+            
+            function showDashboard() {
+                authContainer.classList.add('hidden');
+                dashboard.classList.remove('hidden');
+            }
+            
+            function updateHeader() {
+                headerActions.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                        <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-weight: 600; background-size: cover; background-position: center;" id="header-avatar">
+                            ${getInitials(currentUser.name)}
+                        </div>
+                        <span class="desktop-only">${currentUser.name}</span>
+                    </div>
+                    <button id="logout-btn" class="btn btn-outline desktop-only">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                `;
+                
+                // Update header avatar if profile photo exists
+                if (currentUser.profilePhoto) {
+                    document.getElementById('header-avatar').style.backgroundImage = `url(${currentUser.profilePhoto})`;
+                    document.getElementById('header-avatar').textContent = '';
+                }
+                
+                document.getElementById('logout-btn').addEventListener('click', logout);
+            }
+            
+            function logout() {
+                currentUser = null;
+                localStorage.removeItem('hexamailUser');
+                clearInterval(checkMessagesInterval);
+                
+                dashboard.classList.add('hidden');
+                authContainer.classList.remove('hidden');
+                showLoginForm();
+                
+                // Reset forms
+                loginForm.reset();
+                createAccountForm.reset();
+                accountCreated.classList.add('hidden');
+                
+                headerActions.innerHTML = '';
+                
+                // Close mobile menu if open
+                closeMobileMenu();
+            }
+            
+            function showWelcomeMessage(isReturning) {
+                const now = new Date();
+                const hours = now.getHours();
+                let greeting = 'Hello';
+                
+                if (hours < 12) greeting = 'Good morning';
+                else if (hours < 18) greeting = 'Good afternoon';
+                else greeting = 'Good evening';
+                
+                welcomeMessage.innerHTML = `
+                    <h3>${greeting}, ${currentUser.name}!</h3>
+                    <p>${isReturning ? 'Welcome back to Hexa Mail. Check your inbox for new messages.' : 'Welcome to your new Hexa Mail account! Start connecting with others now.'}</p>
+                `;
+            }
+            
+            function switchTab(tab) {
+                inboxTab.classList.add('hidden');
+                composeTab.classList.add('hidden');
+                chatTab.classList.add('hidden');
+                sentTab.classList.add('hidden');
+                invitationsTab.classList.add('hidden');
+                profileTab.classList.add('hidden');
+                
+                if (tab === 'inbox') {
+                    inboxTab.classList.remove('hidden');
+                    loadMessages();
+                } else if (tab === 'compose') {
+                    composeTab.classList.remove('hidden');
+                    sendConfirmation.classList.add('hidden');
+                    messageContent.focus();
+                } else if (tab === 'chat') {
+                    chatTab.classList.remove('hidden');
+                    loadChats();
+                } else if (tab === 'sent') {
+                    sentTab.classList.remove('hidden');
+                    loadSentMessages();
+                } else if (tab === 'invitations') {
+                    invitationsTab.classList.remove('hidden');
+                    loadInvitations();
+                } else if (tab === 'profile') {
+                    profileTab.classList.remove('hidden');
+                    loadProfileForm();
+                }
+            }
+            
+            function loadMessages() {
+                if (!currentUser) return;
+                
+                const messagesKey = `hexamailMessages_${currentUser.email}`;
+                messages = JSON.parse(localStorage.getItem(messagesKey)) || [];
+                
+                // Mark all as read when loading inbox
+                messages.forEach(msg => msg.read = true);
+                localStorage.setItem(messagesKey, JSON.stringify(messages));
+                
+                // Update unread count
+                updateUnreadCount();
+                
+                if (messages.length === 0) {
+                    inboxMessages.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-inbox"></i>
+                            <h3>Your inbox is empty</h3>
+                            <p>No messages yet. Send one to get started!</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                // Sort by timestamp (newest first)
+                messages.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+                
+                // Display messages
+                inboxMessages.innerHTML = '';
+                messages.forEach(msg => {
+                    const li = document.createElement('li');
+                    li.className = `message-item ${msg.read ? '' : 'unread'}`;
+                    
+                    // Check if message is from external email provider
+                    const isExternalEmail = !msg.senderEmail.endsWith('@hexamail.com');
+                    const emailProvider = getEmailProvider(msg.senderEmail);
+                    
+                    li.innerHTML = `
+                        <div class="message-avatar">${getInitials(msg.senderName)}</div>
+                        <div class="message-content">
+                            <div class="message-header">
+                                <span class="message-sender">${msg.senderName}
+                                    ${isExternalEmail ? `<span class="email-provider-badge ${emailProvider}-badge">${emailProvider}</span>` : ''}
+                                </span>
+                                <span class="message-time">${formatDate(msg.timestamp)}</span>
+                            </div>
+                            <div class="message-subject">${msg.subject}</div>
+                            <div class="message-preview">${msg.content.substring(0, 80)}${msg.content.length > 80 ? '...' : ''}</div>
+                        </div>
+                    `;
+                    
+                    li.addEventListener('click', () => {
+                        showMessageDetail(msg);
+                        // Add view profile button
+                        const messageDetail = document.querySelector('.message-detail');
+                        if (messageDetail) {
+                            const actions = document.createElement('div');
+                            actions.className = 'message-actions';
+                            actions.innerHTML = `
+                                <button class="btn btn-outline view-sender-profile" data-email="${msg.senderEmail}" data-name="${msg.senderName}">
+                                    <i class="fas fa-user"></i> View Sender Profile
+                                </button>
+                            `;
+                            messageDetail.appendChild(actions);
+                            
+                            // Add event listener to the new button
+                            document.querySelector('.view-sender-profile').addEventListener('click', (e) => {
+                                const email = e.currentTarget.getAttribute('data-email');
+                                const name = e.currentTarget.getAttribute('data-name');
+                                showUserProfile(email, name);
+                            });
+                        }
+                    });
+                    inboxMessages.appendChild(li);
+                });
+            }
+            
+            function loadSentMessages() {
+                if (!currentUser) return;
+                
+                const sentMessagesKey = `hexamailSentMessages_${currentUser.email}`;
+                sentMessagesData = JSON.parse(localStorage.getItem(sentMessagesKey)) || [];
+                
+                // Update sent count
+                document.getElementById('sent-count').textContent = sentMessagesData.length;
+                document.getElementById('mobile-sent-count').textContent = sentMessagesData.length;
+                
+                if (sentMessagesData.length === 0) {
+                    sentMessages.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-paper-plane"></i>
+                            <h3>No sent messages</h3>
+                            <p>You haven't sent any messages yet.</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                // Sort by timestamp (newest first)
+                sentMessagesData.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+                
+                // Display messages
+                sentMessages.innerHTML = '';
+                sentMessagesData.forEach(msg => {
+                    const li = document.createElement('li');
+                    li.className = 'message-item';
+                    
+                    // Check if message is to external email provider
+                    const isExternalEmail = !msg.recipientEmail.endsWith('@hexamail.com');
+                    const emailProvider = getEmailProvider(msg.recipientEmail);
+                    
+                    li.innerHTML = `
+                        <div class="message-avatar">${getInitials(msg.recipientName)}</div>
+                        <div class="message-content">
+                            <div class="message-header">
+                                <span class="message-sender">To: ${msg.recipientName}
+                                    ${isExternalEmail ? `<span class="email-provider-badge ${emailProvider}-badge">${emailProvider}</span>` : ''}
+                                </span>
+                                <span class="message-time">${formatDate(msg.timestamp)}</span>
+                            </div>
+                            <div class="message-subject">${msg.subject}</div>
+                            <div class="message-preview">${msg.content.substring(0, 80)}${msg.content.length > 80 ? '...' : ''}</div>
+                        </div>
+                    `;
+                    
+                    li.addEventListener('click', () => {
+                        showMessageDetail(msg);
+                        // Add view profile button
+                        const messageDetail = document.querySelector('.message-detail');
+                        if (messageDetail) {
+                            const actions = document.createElement('div');
+                            actions.className = 'message-actions';
+                            actions.innerHTML = `
+                                <button class="btn btn-outline view-recipient-profile" data-email="${msg.recipientEmail}" data-name="${msg.recipientName}">
+                                    <i class="fas fa-user"></i> View Recipient Profile
+                                </button>
+                            `;
+                            messageDetail.appendChild(actions);
+                            
+                            // Add event listener to the new button
+                            document.querySelector('.view-recipient-profile').addEventListener('click', (e) => {
+                                const email = e.currentTarget.getAttribute('data-email');
+                                const name = e.currentTarget.getAttribute('data-name');
+                                showUserProfile(email, name);
+                            });
+                        }
+                    });
+                    sentMessages.appendChild(li);
+                });
+            }
+            
+            function loadInvitations() {
+                if (!currentUser) return;
+                
+                const invitationsKey = `hexamailInvitations_${currentUser.email}`;
+                invitations = JSON.parse(localStorage.getItem(invitationsKey)) || [];
+                
+                // Update invitations count
+                document.getElementById('invitations-count').textContent = invitations.length;
+                document.getElementById('mobile-invitations-count').textContent = invitations.length;
+                
+                if (invitations.length === 0) {
+                    invitationsList.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-envelope"></i>
+                            <h3>No invitations</h3>
+                            <p>You don't have any pending invitations.</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                // Display invitations
+                invitationsList.innerHTML = '';
+                invitations.forEach(invitation => {
+                    const invitationEl = document.createElement('div');
+                    invitationEl.className = 'invitation-card';
+                    invitationEl.innerHTML = `
+                        <div class="invitation-header">
+                            <div class="invitation-title">${invitation.type === 'group' ? 'Group Invitation' : 'Chat Invitation'}</div>
+                            <div class="invitation-date">${formatDate(invitation.date)}</div>
+                        </div>
+                        <div class="invitation-message">
+                            <strong>${invitation.fromName}</strong> has invited you to ${invitation.type === 'group' ? 'join a group' : 'start a chat'}.
+                            ${invitation.groupName ? `Group: ${invitation.groupName}` : ''}
+                        </div>
+                        <div class="invitation-actions">
+                            <button class="btn btn-primary accept-invitation" data-id="${invitation.id}">
+                                <i class="fas fa-check"></i> Accept
+                            </button>
+                            <button class="btn btn-outline decline-invitation" data-id="${invitation.id}">
+                                <i class="fas fa-times"></i> Decline
+                            </button>
+                        </div>
+                    `;
+                    
+                    invitationsList.appendChild(invitationEl);
+                });
+                
+                // Add event listeners to invitation buttons
+                document.querySelectorAll('.accept-invitation').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const invitationId = e.currentTarget.getAttribute('data-id');
+                        acceptInvitation(invitationId);
+                    });
+                });
+                
+                document.querySelectorAll('.decline-invitation').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const invitationId = e.currentTarget.getAttribute('data-id');
+                        declineInvitation(invitationId);
+                    });
+                });
+            }
+            
+            function acceptInvitation(invitationId) {
+                const invitation = invitations.find(inv => inv.id === invitationId);
+                if (!invitation) return;
+                
+                if (invitation.type === 'group') {
+                    // Add user to group
+                    const groupsKey = `hexamailGroups_${currentUser.email}`;
+                    let groups = JSON.parse(localStorage.getItem(groupsKey)) || [];
+                    
+                    // Check if user is already in the group
+                    if (!groups.some(group => group.id === invitation.groupId)) {
+                        const group = {
+                            id: invitation.groupId,
+                            name: invitation.groupName,
+                            description: invitation.groupDesc,
+                            participants: invitation.participants,
+                            joinedAt: new Date().toISOString()
+                        };
+                        
+                        groups.push(group);
+                        localStorage.setItem(groupsKey, JSON.stringify(groups));
+                        
+                        showAlert('You have joined the group!', 'success');
+                    }
+                } else {
+                    // Start direct chat
+                    const chat = {
+                        id: generateId(),
+                        type: 'direct',
+                        participants: [currentUser.email, invitation.fromEmail],
+                        createdAt: new Date().toISOString(),
+                        messages: []
+                    };
+                    
+                    // Save chat
+                    const chatsKey = `hexamailChats_${currentUser.email}`;
+                    let userChats = JSON.parse(localStorage.getItem(chatsKey)) || [];
+                    userChats.push(chat);
+                    localStorage.setItem(chatsKey, JSON.stringify(userChats));
+                    
+                    // Also save for the other user
+                    const otherUserChatsKey = `hexamailChats_${invitation.fromEmail}`;
+                    let otherUserChats = JSON.parse(localStorage.getItem(otherUserChatsKey)) || [];
+                    
+                    // Check if chat already exists
+                    if (!otherUserChats.some(c => c.participants.includes(currentUser.email))) {
+                        otherUserChats.push(chat);
+                        localStorage.setItem(otherUserChatsKey, JSON.stringify(otherUserChats));
+                    }
+                    
+                    showAlert(`You've started a chat with ${invitation.fromName}`, 'success');
+                    
+                    // Load chats to update the UI
+                    loadChats();
+                }
+                
+                // Remove invitation
+                removeInvitation(invitationId);
+            }
+            
+            function declineInvitation(invitationId) {
+                removeInvitation(invitationId);
+                showAlert('Invitation declined', 'success');
+            }
+            
+            function removeInvitation(invitationId) {
+                const invitationsKey = `hexamailInvitations_${currentUser.email}`;
+                invitations = invitations.filter(inv => inv.id !== invitationId);
+                localStorage.setItem(invitationsKey, JSON.stringify(invitations));
+                
+                loadInvitations();
+            }
+            
+            function showMessageDetail(msg) {
+                // Remove any existing detail view
+                document.querySelectorAll('.message-detail').forEach(el => el.remove());
+                
+                const detail = document.createElement('div');
+                detail.className = 'message-detail';
+                
+                // Check if message is from external email provider
+                const isExternalEmail = !msg.senderEmail.endsWith('@hexamail.com');
+                const emailProvider = getEmailProvider(msg.senderEmail);
+                
+                detail.innerHTML = `
+                    <div class="message-detail-header">
+                        <div>
+                            <h3 class="message-detail-title">${msg.subject}</h3>
+                            <p class="message-detail-meta">
+                                From: ${msg.senderName} &lt;${msg.senderEmail}&gt;
+                                ${isExternalEmail ? `<span class="email-provider-badge ${emailProvider}-badge">${emailProvider}</span>` : ''}
+                                <br>
+                                To: ${msg.recipientName} &lt;${msg.recipientEmail}&gt;<br>
+                                Date: ${formatDate(msg.timestamp, true)}
+                            </p>
+                        </div>
+                    </div>
+                    ${isExternalEmail ? `
+                    <div class="external-email-notice">
+                        <i class="fas fa-info-circle"></i>
+                        This message was received from an external email provider.
+                    </div>
+                    ` : ''}
+                    <div class="message-detail-body">
+                        ${msg.content.replace(/\n/g, '<br>')}
+                    </div>
+                `;
+                
+                // Insert after the clicked message
+                const clickedItem = event.currentTarget;
+                clickedItem.parentNode.insertBefore(detail, clickedItem.nextSibling);
+                
+                // Show the detail
+                detail.style.display = 'block';
+            }
+            
+            function sendMessage(e) {
+                e.preventDefault();
+                
+                if (!currentUser) return;
+                
+                const recipientEmailValue = recipientEmail.value.trim();
+                const subjectValue = messageSubject.value.trim();
+                const contentValue = messageContent.value.trim();
+                
+                // Validate inputs
+                if (!recipientEmailValue || !subjectValue || !contentValue) {
+                    showAlert('Please fill in all fields', 'error');
+                    return;
+                }
+                
+                // Prevent users from sending messages to themselves
+                if (recipientEmailValue === currentUser.email) {
+                    showAlert('You cannot send messages to yourself', 'error');
+                    return;
+                }
+                
+                // Check if recipient exists (for Hexa Mail users)
+                const users = JSON.parse(localStorage.getItem('hexamailUsers')) || [];
+                let recipientNameValue = recipientEmailValue; // Default to email if name not found
+                
+                const recipientExists = users.some(user => user.email === recipientEmailValue);
+                if (recipientExists) {
+                    const recipientUser = users.find(user => user.email === recipientEmailValue);
+                    recipientNameValue = recipientUser.name;
+                } else {
+                    // For external emails, we'll use the email as the name
+                    recipientNameValue = recipientEmailValue;
+                }
+                
+                // Create message object
+                const message = {
+                    senderEmail: currentUser.email,
+                    senderName: currentUser.name,
+                    recipientEmail: recipientEmailValue,
+                    recipientName: recipientNameValue,
+                    subject: subjectValue,
+                    content: contentValue,
+                    timestamp: new Date().toISOString(),
+                    read: false
+                };
+                
+                // Check if recipient is a Hexa Mail user
+                if (recipientEmailValue.endsWith('@hexamail.com')) {
+                    // Save message to recipient's storage
+                    const recipientMessagesKey = `hexamailMessages_${recipientEmailValue}`;
+                    let recipientMessages = JSON.parse(localStorage.getItem(recipientMessagesKey)) || [];
+                    recipientMessages.push(message);
+                    localStorage.setItem(recipientMessagesKey, JSON.stringify(recipientMessages));
+                } else {
+                    // For external emails, simulate sending to external provider
+                    // In a real application, this would connect to an email API
+                    showAlert(`Message sent to ${recipientEmailValue} (external email)`, 'success');
+                }
+                
+                // Add to current user's sent messages
+                const sentMessagesKey = `hexamailSentMessages_${currentUser.email}`;
+                let userSentMessages = JSON.parse(localStorage.getItem(sentMessagesKey)) || [];
+                userSentMessages.push(message);
+                localStorage.setItem(sentMessagesKey, JSON.stringify(userSentMessages));
+                
+                // Update sent messages data
+                sentMessagesData = userSentMessages;
+                document.getElementById('sent-count').textContent = sentMessagesData.length;
+                document.getElementById('mobile-sent-count').textContent = sentMessagesData.length;
+                
+                // Show confirmation
+                const isExternalEmail = !recipientEmailValue.endsWith('@hexamail.com');
+                const emailProvider = getEmailProvider(recipientEmailValue);
+                
+                sendConfirmation.innerHTML = `
+                    <i class="fas fa-check-circle"></i> Message sent to ${recipientNameValue} (${recipientEmailValue})
+                    ${isExternalEmail ? `<span class="email-provider-badge ${emailProvider}-badge">${emailProvider}</span>` : ''}
+                `;
+                sendConfirmation.classList.remove('hidden');
+                
+                // Clear form
+                composeForm.reset();
+                
+                // Scroll to confirmation
+                setTimeout(() => {
+                    sendConfirmation.scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+                
+                // Update sent messages if on that tab
+                if (!sentTab.classList.contains('hidden')) {
+                    loadSentMessages();
+                }
+            }
+            
+            function startMessageChecking() {
+                // Check for new messages every 3 seconds
+                checkMessagesInterval = setInterval(() => {
+                    const messagesKey = `hexamailMessages_${currentUser.email}`;
+                    const currentMessages = JSON.parse(localStorage.getItem(messagesKey)) || [];
+                    
+                    if (currentMessages.length > messages.length) {
+                        // New messages arrived
+                        if (inboxTab.classList.contains('hidden')) {
+                            // Show notification in header
+                            headerActions.innerHTML = `
+                                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                    <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-weight: 600; background-size: cover; background-position: center;" id="header-avatar">
+                                        ${getInitials(currentUser.name)}
+                                    </div>
+                                    <span class="desktop-only">${currentUser.name}</span>
+                                </div>
+                                <button id="logout-btn" class="btn btn-primary desktop-only">
+                                    <i class="fas fa-envelope"></i> ${currentMessages.length - messages.length} New Message${currentMessages.length - messages.length > 1 ? 's' : ''}
+                                </button>
+                                <button id="mobile-notification-btn" class="btn btn-primary mobile-only">
+                                    <i class="fas fa-envelope"></i> ${currentMessages.length - messages.length}
+                                </button>
+                            `;
+                            
+                            // Update header avatar if profile photo exists
+                            if (currentUser.profilePhoto) {
+                                document.getElementById('header-avatar').style.backgroundImage = `url(${currentUser.profilePhoto})`;
+                                document.getElementById('header-avatar').textContent = '';
+                            }
+                            
+                            document.getElementById('logout-btn').addEventListener('click', logout);
+                            document.getElementById('mobile-notification-btn').addEventListener('click', () => {
+                                switchTab('inbox');
+                                loadMessages();
+                                updateHeader();
+                            });
+                        }
+                        
+                        loadMessages();
+                    }
+                    
+                    // Simulate receiving messages from external providers
+                    simulateExternalEmails();
+                }, 3000);
+            }
+            
+            function simulateExternalEmails() {
+                // Simulate receiving emails from external providers
+                // In a real application, this would connect to an email API
+                if (Math.random() < 0.1) { // 10% chance of receiving an external email
+                    const externalSenders = [
+                        { email: 'john.doe@gmail.com', name: 'John Doe' },
+                        { email: 'jane.smith@yahoo.com', name: 'Jane Smith' },
+                        { email: 'robert.johnson@outlook.com', name: 'Robert Johnson' },
+                        { email: 'sarah.williams@gmail.com', name: 'Sarah Williams' },
+                        { email: 'michael.brown@yahoo.com', name: 'Michael Brown' }
+                    ];
+                    
+                    const sender = externalSenders[Math.floor(Math.random() * externalSenders.length)];
+                    const subjects = [
+                        'Hello from Gmail!',
+                        'Important message from Yahoo',
+                        'Greetings from Outlook',
+                        'Checking in',
+                        'Following up on our conversation'
+                    ];
+                    
+                    const subject = subjects[Math.floor(Math.random() * subjects.length)];
+                    const content = `This is a simulated email from ${sender.email}. In a real application, this would be an actual email received from an external email provider.`;
+                    
+                    const message = {
+                        senderEmail: sender.email,
+                        senderName: sender.name,
+                        recipientEmail: currentUser.email,
+                        recipientName: currentUser.name,
+                        subject: subject,
+                        content: content,
+                        timestamp: new Date().toISOString(),
+                        read: false
+                    };
+                    
+                    // Save to inbox
+                    const messagesKey = `hexamailMessages_${currentUser.email}`;
+                    let messages = JSON.parse(localStorage.getItem(messagesKey)) || [];
+                    messages.push(message);
+                    localStorage.setItem(messagesKey, JSON.stringify(messages));
+                    
+                    // Reload messages if we're on the inbox tab
+                    if (!inboxTab.classList.contains('hidden')) {
+                        loadMessages();
+                    }
+                }
+            }
+            
+            function getEmailProvider(email) {
+                if (email.endsWith('@gmail.com')) return 'gmail';
+                if (email.endsWith('@yahoo.com')) return 'yahoo';
+                if (email.endsWith('@outlook.com') || email.endsWith('@hotmail.com')) return 'outlook';
+                return 'external';
+            }
+            
+            function updateUnreadCount() {
+                const unreadCount = messages.filter(msg => !msg.read).length;
+                document.getElementById('inbox-count').textContent = unreadCount;
+                document.getElementById('mobile-inbox-count').textContent = unreadCount;
+                
+                // Update browser tab title if there are unread messages
+                document.title = unreadCount > 0 
+                    ? `(${unreadCount}) Hexa Mail` 
+                    : 'Hexa Mail';
+            }
+            
+            function loadProfileData() {
+                if (!currentUser) return;
+                
+                // Set profile avatar
+                if (currentUser.profilePhoto) {
+                    profilePhotoPreview.style.backgroundImage = `url(${currentUser.profilePhoto})`;
+                    profilePhotoPreview.textContent = '';
+                    mobileProfilePhotoPreview.style.backgroundImage = `url(${currentUser.profilePhoto})`;
+                    mobileProfilePhotoPreview.textContent = '';
+                } else {
+                    profilePhotoPreview.style.backgroundImage = 'none';
+                    profilePhotoPreview.textContent = getInitials(currentUser.name);
+                    mobileProfilePhotoPreview.style.backgroundImage = 'none';
+                    mobileProfilePhotoPreview.textContent = getInitials(currentUser.name);
+                }
+                
+                profileName.textContent = currentUser.name;
+                profileEmail.textContent = currentUser.email;
+                profileDesc.textContent = currentUser.desc || 'No description provided';
+                
+                mobileProfileName.textContent = currentUser.name;
+                mobileProfileEmail.textContent = currentUser.email;
+                mobileProfileDesc.textContent = currentUser.desc || 'No description provided';
+            }
+            
+            function handleProfilePhotoUpload(e) {
+                const file = e.target.files[0];
+                if (!file) return;
+                
+                if (!file.type.startsWith('image/')) {
+                    showAlert('Please select an image file', 'error');
+                    return;
+                }
+                
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const imageData = event.target.result;
+                    
+                    // Update current user
+                    currentUser.profilePhoto = imageData;
+                    localStorage.setItem('hexamailUser', JSON.stringify(currentUser));
+                    
+                    // Update in users list
+                    const users = JSON.parse(localStorage.getItem('hexamailUsers')) || [];
+                    const userIndex = users.findIndex(user => user.email === currentUser.email);
+                    if (userIndex !== -1) {
+                        users[userIndex].profilePhoto = imageData;
+                        localStorage.setItem('hexamailUsers', JSON.stringify(users));
+                    }
+                    
+                    // Update profile display
+                    loadProfileData();
+                    updateHeader();
+                    
+                    showAlert('Profile photo updated successfully!', 'success');
+                };
+                reader.readAsDataURL(file);
+            }
+            
+            function loadProfileForm() {
+                if (!currentUser) return;
+                
+                editName.value = currentUser.name;
+                editCountry.value = currentUser.country;
+                editDesc.value = currentUser.desc || '';
+                profileEmailDisplay.textContent = currentUser.email;
+            }
+            
+            function updateProfile(e) {
+                e.preventDefault();
+                
+                const name = editName.value.trim();
+                const country = editCountry.value.trim();
+                const desc = editDesc.value.trim();
+                
+                if (!name || !country) {
+                    showAlert('Please enter your name and country', 'error');
+                    return;
+                }
+                
+                // Update current user
+                currentUser.name = name;
+                currentUser.country = country;
+                currentUser.desc = desc;
+                localStorage.setItem('hexamailUser', JSON.stringify(currentUser));
+                
+                // Update in users list
+                const users = JSON.parse(localStorage.getItem('hexamailUsers')) || [];
+                const userIndex = users.findIndex(user => user.email === currentUser.email);
+                if (userIndex !== -1) {
+                    users[userIndex] = {
+                        ...users[userIndex],
+                        name,
+                        country,
+                        desc
+                    };
+                    localStorage.setItem('hexamailUsers', JSON.stringify(users));
+                }
+                
+                // Update profile display
+                loadProfileData();
+                updateHeader();
+                
+                showAlert('Profile updated successfully!', 'success');
+            }
+            
+            function showCurrentUserProfile() {
+                showUserProfile(currentUser.email, currentUser.name);
+            }
+            
+            function showUserProfile(email, name) {
+                const users = JSON.parse(localStorage.getItem('hexamailUsers')) || [];
+                const user = users.find(u => u.email === email);
+                
+                if (!user) {
+                    showAlert('User profile not found', 'error');
+                    return;
+                }
+                
+                currentViewingProfile = user;
+                
+                // Set modal content
+                if (user.profilePhoto) {
+                    modalProfilePhoto.style.backgroundImage = `url(${user.profilePhoto})`;
+                    modalProfilePhoto.textContent = '';
+                } else {
+                    modalProfilePhoto.style.backgroundImage = 'none';
+                    modalProfilePhoto.textContent = getInitials(user.name);
+                }
+                
+                modalName.textContent = user.name;
+                modalEmail.textContent = user.email;
+                modalCountry.textContent = user.country || 'Not specified';
+                modalDesc.textContent = user.desc || 'No description provided';
+                
+                // Hide email if not viewing own profile
+                if (email !== currentUser.email) {
+                    modalEmailContainer.classList.add('hidden');
+                } else {
+                    modalEmailContainer.classList.remove('hidden');
+                }
+                
+                // Show modal
+                userProfileModal.classList.add('active');
+            }
+            
+            // Chat Functions
+            function loadChats() {
+                if (!currentUser) return;
+                
+                const chatsKey = `hexamailChats_${currentUser.email}`;
+                chats = JSON.parse(localStorage.getItem(chatsKey)) || [];
+                
+                // Update chat count
+                const unreadChats = chats.filter(chat => {
+                    const lastMessage = chat.messages[chat.messages.length - 1];
+                    return lastMessage && !lastMessage.read && lastMessage.senderEmail !== currentUser.email;
+                }).length;
+                
+                document.getElementById('chat-count').textContent = unreadChats;
+                document.getElementById('mobile-chat-count').textContent = unreadChats;
+                
+                if (chats.length === 0) {
+                    chatList.innerHTML = `
+                        <div class="empty-state" style="padding: 1rem;">
+                            <i class="fas fa-comments"></i>
+                            <h3>No conversations</h3>
+                            <p>Start a new chat to begin messaging</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                // Display chats
+                chatList.innerHTML = '';
+                chats.forEach(chat => {
+                    const otherParticipant = chat.participants.find(p => p !== currentUser.email);
+                    const users = JSON.parse(localStorage.getItem('hexamailUsers')) || [];
+                    const user = users.find(u => u.email === otherParticipant) || { name: otherParticipant, email: otherParticipant };
+                    
+                    const lastMessage = chat.messages[chat.messages.length - 1];
+                    const unreadCount = chat.messages.filter(m => !m.read && m.senderEmail !== currentUser.email).length;
+                    
+                    const li = document.createElement('li');
+                    li.className = `chat-list-item ${chat.id === currentChat?.id ? 'active' : ''}`;
+                    li.innerHTML = `
+                        <div class="message-avatar">${getInitials(user.name)}</div>
+                        <div class="chat-info">
+                            <div class="chat-name">${user.name}</div>
+                            <div class="chat-preview">${lastMessage ? (lastMessage.type === 'text' ? lastMessage.content : lastMessage.type === 'voice' ? 'Voice message' : 'Emoji') : 'No messages yet'}</div>
+                        </div>
+                        <div class="chat-time">${lastMessage ? formatDate(lastMessage.timestamp) : ''}</div>
+                        ${unreadCount > 0 ? `<div class="unread-count">${unreadCount}</div>` : ''}
+                    `;
+                    
+                    li.addEventListener('click', () => {
+                        selectChat(chat);
+                    });
+                    
+                    chatList.appendChild(li);
+                });
+            }
+            
+            function loadGroups() {
+                if (!currentUser) return;
+                
+                const groupsKey = `hexamailGroups_${currentUser.email}`;
+                groups = JSON.parse(localStorage.getItem(groupsKey)) || [];
+                
+                // Add groups to chats for display
+                groups.forEach(group => {
+                    const groupChat = {
+                        id: group.id,
+                        type: 'group',
+                        name: group.name,
+                        description: group.description,
+                        participants: group.participants,
+                        createdAt: group.joinedAt,
+                        messages: [] // Groups would have their own messages storage in a real app
+                    };
+                    
+                    // Check if this group is already in chats
+                    if (!chats.some(chat => chat.id === group.id)) {
+                        chats.push(groupChat);
+                    }
+                });
+            }
+            
+            function selectChat(chat) {
+                currentChat = chat;
+                
+                // Update UI
+                document.querySelectorAll('.chat-list-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                document.querySelectorAll('.chat-list-item').forEach(item => {
+                    if (item.querySelector('.chat-name').textContent === (chat.type === 'group' ? chat.name : getOtherParticipant(chat).name)) {
+                        item.classList.add('active');
+                    }
+                });
+                
+                if (chat.type === 'group') {
+                    currentChatTitle.textContent = chat.name;
+                    loadGroupMessages(chat.id);
+                } else {
+                    const otherParticipant = getOtherParticipant(chat);
+                    currentChatTitle.textContent = otherParticipant.name;
+                    loadDirectMessages(chat.id);
+                }
+            }
+            
+            function getOtherParticipant(chat) {
+                const otherParticipantEmail = chat.participants.find(p => p !== currentUser.email);
+                const users = JSON.parse(localStorage.getItem('hexamailUsers')) || [];
+                return users.find(u => u.email === otherParticipantEmail) || { name: otherParticipantEmail, email: otherParticipantEmail };
+            }
+            
+            function loadDirectMessages(chatId) {
+                const chat = chats.find(c => c.id === chatId);
+                if (!chat) return;
+                
+                if (chat.messages.length === 0) {
+                    chatMessages.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-comment"></i>
+                            <h3>No messages yet</h3>
+                            <p>Send a message to start the conversation</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                // Display messages
+                chatMessages.innerHTML = '';
+                chat.messages.forEach(message => {
+                    const messageEl = document.createElement('div');
+                    messageEl.className = `message ${message.senderEmail === currentUser.email ? 'sent' : 'received'}`;
+                    
+                    if (message.type === 'text') {
+                        messageEl.innerHTML = `
+                            <div>${message.content}</div>
+                            <div class="message-time">${formatDate(message.timestamp, true)}</div>
+                        `;
+                    } else if (message.type === 'voice') {
+                        messageEl.innerHTML = `
+                            <div class="voice-message">
+                                <div class="voice-play-btn">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                                <div class="voice-wave">
+                                    <div class="voice-bar"></div>
+                                    <div class="voice-bar"></div>
+                                    <div class="voice-bar"></div>
+                                    <div class="voice-bar"></div>
+                                    <div class="voice-bar"></div>
+                                </div>
+                            </div>
+                            <div class="message-time">${formatDate(message.timestamp, true)}</div>
+                        `;
+                    } else if (message.type === 'emoji') {
+                        messageEl.innerHTML = `
+                            <div style="font-size: 2rem;">${message.content}</div>
+                            <div class="message-time">${formatDate(message.timestamp, true)}</div>
+                        `;
+                    }
+                    
+                    chatMessages.appendChild(messageEl);
+                });
+                
+                // Scroll to bottom
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+            
+            function loadGroupMessages(groupId) {
+                // In a real app, this would load messages from group storage
+                // For this demo, we'll just show a placeholder
+                chatMessages.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-users"></i>
+                        <h3>Group Chat</h3>
+                        <p>This is a group conversation with multiple participants</p>
+                    </div>
+                `;
+            }
+            
+            function sendChatMessage() {
+                if (!currentChat || !chatInput.value.trim()) return;
+                
+                const message = {
+                    id: generateId(),
+                    type: 'text',
+                    content: chatInput.value.trim(),
+                    senderEmail: currentUser.email,
+                    timestamp: new Date().toISOString(),
+                    read: false
+                };
+                
+                // Add message to chat
+                const chatIndex = chats.findIndex(c => c.id === currentChat.id);
+                if (chatIndex !== -1) {
+                    chats[chatIndex].messages.push(message);
+                    
+                    // Save to localStorage
+                    const chatsKey = `hexamailChats_${currentUser.email}`;
+                    localStorage.setItem(chatsKey, JSON.stringify(chats));
+                    
+                    // Also save for the other participant in direct chats
+                    if (currentChat.type === 'direct') {
+                        const otherParticipant = getOtherParticipant(currentChat);
+                        const otherChatsKey = `hexamailChats_${otherParticipant.email}`;
+                        let otherChats = JSON.parse(localStorage.getItem(otherChatsKey)) || [];
+                        
+                        const otherChatIndex = otherChats.findIndex(c => c.id === currentChat.id);
+                        if (otherChatIndex !== -1) {
+                            otherChats[otherChatIndex].messages.push(message);
+                            localStorage.setItem(otherChatsKey, JSON.stringify(otherChats));
+                        }
+                    }
+                    
+                    // Update UI
+                    loadDirectMessages(currentChat.id);
+                    
+                    // Clear input
+                    chatInput.value = '';
+                    chatInput.style.height = 'auto';
+                }
+            }
+            
+            function toggleEmojiPicker() {
+                emojiPicker.classList.toggle('hidden');
+                if (!emojiPicker.classList.contains('hidden')) {
+                    // Add click outside to close
+                    setTimeout(() => {
+                        document.addEventListener('click', closeEmojiPickerOnClickOutside);
+                    }, 10);
+                } else {
+                    document.removeEventListener('click', closeEmojiPickerOnClickOutside);
+                }
+            }
+            
+            function closeEmojiPickerOnClickOutside(e) {
+                if (!emojiPicker.contains(e.target) && e.target !== emojiBtn) {
+                    emojiPicker.classList.add('hidden');
+                    document.removeEventListener('click', closeEmojiPickerOnClickOutside);
+                }
+            }
+            
+            function populateEmojiPicker() {
+                emojiPicker.innerHTML = '';
+                emojis.forEach(emoji => {
+                    const emojiEl = document.createElement('div');
+                    emojiEl.className = 'emoji';
+                    emojiEl.textContent = emoji;
+                    emojiEl.addEventListener('click', () => {
+                        // Send emoji as message
+                        if (!currentChat) return;
+                        
+                        const message = {
+                            id: generateId(),
+                            type: 'emoji',
+                            content: emoji,
+                            senderEmail: currentUser.email,
+                            timestamp: new Date().toISOString(),
+                            read: false
+                        };
+                        
+                        // Add message to chat
+                        const chatIndex = chats.findIndex(c => c.id === currentChat.id);
+                        if (chatIndex !== -1) {
+                            chats[chatIndex].messages.push(message);
+                            
+                            // Save to localStorage
+                            const chatsKey = `hexamailChats_${currentUser.email}`;
+                            localStorage.setItem(chatsKey, JSON.stringify(chats));
+                            
+                            // Also save for the other participant in direct chats
+                            if (currentChat.type === 'direct') {
+                                const otherParticipant = getOtherParticipant(currentChat);
+                                const otherChatsKey = `hexamailChats_${otherParticipant.email}`;
+                                let otherChats = JSON.parse(localStorage.getItem(otherChatsKey)) || [];
+                                
+                                const otherChatIndex = otherChats.findIndex(c => c.id === currentChat.id);
+                                if (otherChatIndex !== -1) {
+                                    otherChats[otherChatIndex].messages.push(message);
+                                    localStorage.setItem(otherChatsKey, JSON.stringify(otherChats));
+                                }
+                            }
+                            
+                            // Update UI
+                            loadDirectMessages(currentChat.id);
+                            
+                            // Close emoji picker
+                            emojiPicker.classList.add('hidden');
+                        }
+                    });
+                    emojiPicker.appendChild(emojiEl);
+                });
+            }
+            
+            function toggleVoiceRecorder() {
+                if (voiceRecorderActive) {
+                    stopVoiceRecording();
+                } else {
+                    startVoiceRecording();
+                }
+            }
+            
+            function startVoiceRecording() {
+                if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                    showAlert('Voice recording is not supported in your browser', 'error');
+                    return;
+                }
+                
+                navigator.mediaDevices.getUserMedia({ audio: true })
+                    .then(stream => {
+                        voiceRecorderActive = true;
+                        audioChunks = [];
+                        mediaRecorder = new MediaRecorder(stream);
+                        
+                        mediaRecorder.ondataavailable = (event) => {
+                            audioChunks.push(event.data);
+                        };
+                        
+                        mediaRecorder.onstop = () => {
+                            const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+                            sendVoiceMessage(audioBlob);
+                            
+                            // Stop all audio tracks
+                            stream.getTracks().forEach(track => track.stop());
+                        };
+                        
+                        mediaRecorder.start();
+                        voiceRecorder.classList.remove('hidden');
+                        
+                        // Start timer
+                        recordingSeconds = 0;
+                        updateVoiceTimer();
+                        recordingTimer = setInterval(() => {
+                            recordingSeconds++;
+                            updateVoiceTimer();
+                        }, 1000);
+                        
+                        // Change icon
+                        voiceBtn.innerHTML = '<i class="fas fa-stop"></i>';
+                    })
+                    .catch(error => {
+                        showAlert('Error accessing microphone: ' + error.message, 'error');
+                    });
+            }
+            
+            function stopVoiceRecording() {
+                if (!voiceRecorderActive) return;
+                
+                voiceRecorderActive = false;
+                mediaRecorder.stop();
+                voiceRecorder.classList.add('hidden');
+                clearInterval(recordingTimer);
+                
+                // Reset icon
+                voiceBtn.innerHTML = '<i class="fas fa-microphone"></i>';
+            }
+            
+            function updateVoiceTimer() {
+                const minutes = Math.floor(recordingSeconds / 60);
+                const seconds = recordingSeconds % 60;
+                voiceTimer.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }
+            
+            function sendVoiceMessage(audioBlob) {
+                if (!currentChat) return;
+                
+                // Convert blob to data URL for storage
+                const reader = new FileReader();
+                reader.readAsDataURL(audioBlob);
+                reader.onloadend = () => {
+                    const base64data = reader.result;
+                    
+                    const message = {
+                        id: generateId(),
+                        type: 'voice',
+                        content: base64data,
+                        senderEmail: currentUser.email,
+                        timestamp: new Date().toISOString(),
+                        read: false
+                    };
+                    
+                    // Add message to chat
+                    const chatIndex = chats.findIndex(c => c.id === currentChat.id);
+                    if (chatIndex !== -1) {
+                        chats[chatIndex].messages.push(message);
+                        
+                        // Save to localStorage
+                        const chatsKey = `hexamailChats_${currentUser.email}`;
+                        localStorage.setItem(chatsKey, JSON.stringify(chats));
+                        
+                        // Also save for the other participant in direct chats
+                        if (currentChat.type === 'direct') {
+                            const otherParticipant = getOtherParticipant(currentChat);
+                            const otherChatsKey = `hexamailChats_${otherParticipant.email}`;
+                            let otherChats = JSON.parse(localStorage.getItem(otherChatsKey)) || [];
+                            
+                            const otherChatIndex = otherChats.findIndex(c => c.id === currentChat.id);
+                            if (otherChatIndex !== -1) {
+                                otherChats[otherChatIndex].messages.push(message);
+                                localStorage.setItem(otherChatsKey, JSON.stringify(otherChats));
+                            }
+                        }
+                        
+                        // Update UI
+                        loadDirectMessages(currentChat.id);
+                    }
+                };
+            }
+            
+            function clearChat() {
+                if (!currentChat) return;
+                
+                if (confirm('Are you sure you want to clear this chat? This action cannot be undone.')) {
+                    const chatIndex = chats.findIndex(c => c.id === currentChat.id);
+                    if (chatIndex !== -1) {
+                        chats[chatIndex].messages = [];
+                        
+                        // Save to localStorage
+                        const chatsKey = `hexamailChats_${currentUser.email}`;
+                        localStorage.setItem(chatsKey, JSON.stringify(chats));
+                        
+                        // Also clear for the other participant in direct chats
+                        if (currentChat.type === 'direct') {
+                            const otherParticipant = getOtherParticipant(currentChat);
+                            const otherChatsKey = `hexamailChats_${otherParticipant.email}`;
+                            let otherChats = JSON.parse(localStorage.getItem(otherChatsKey)) || [];
+                            
+                            const otherChatIndex = otherChats.findIndex(c => c.id === currentChat.id);
+                            if (otherChatIndex !== -1) {
+                                otherChats[otherChatIndex].messages = [];
+                                localStorage.setItem(otherChatsKey, JSON.stringify(otherChats));
+                            }
+                        }
+                        
+                        // Update UI
+                        loadDirectMessages(currentChat.id);
+                        
+                        showAlert('Chat cleared successfully', 'success');
+                    }
+                }
+            }
+            
+            function showChatInfo() {
+                if (!currentChat) return;
+                
+                if (currentChat.type === 'group') {
+                    groupInfoTitle.textContent = 'Group Info';
+                    groupInfoName.textContent = currentChat.name;
+                    groupInfoDesc.textContent = currentChat.description || 'No description';
+                    
+                    // Load group members
+                    groupMembersList.innerHTML = '';
+                    currentChat.participants.forEach(participant => {
+                        const users = JSON.parse(localStorage.getItem('hexamailUsers')) || [];
+                        const user = users.find(u => u.email === participant) || { name: participant, email: participant };
+                        
+                        const memberEl = document.createElement('div');
+                        memberEl.className = 'member-item';
+                        memberEl.innerHTML = `
+                            <div class="member-avatar">${getInitials(user.name)}</div>
+                            <div>${user.name}</div>
+                        `;
+                        groupMembersList.appendChild(memberEl);
+                    });
+                    
+                    groupInfoModal.classList.add('active');
+                } else {
+                    const otherParticipant = getOtherParticipant(currentChat);
+                    showUserProfile(otherParticipant.email, otherParticipant.name);
+                }
+            }
+            
+            function loadUserList() {
+                const users = JSON.parse(localStorage.getItem('hexamailUsers')) || [];
+                // Filter out current user
+                const otherUsers = users.filter(user => user.email !== currentUser.email);
+                
+                userList.innerHTML = '';
+                otherUsers.forEach(user => {
+                    const userEl = document.createElement('div');
+                    userEl.className = 'member-item';
+                    userEl.innerHTML = `
+                        <div class="member-avatar">${getInitials(user.name)}</div>
+                        <div>
+                            <div>${user.name}</div>
+                            <div style="font-size: 0.8rem; color: var(--darker);">${user.email}</div>
+                        </div>
+                    `;
+                    
+                    userEl.addEventListener('click', () => {
+                        startNewChat(user);
+                        newChatModal.classList.remove('active');
+                    });
+                    
+                    userList.appendChild(userEl);
+                });
+            }
+            
+            function filterUserList() {
+                const searchTerm = searchUser.value.toLowerCase();
+                const userItems = userList.querySelectorAll('.member-item');
+                
+                userItems.forEach(item => {
+                    const name = item.querySelector('div > div:first-child').textContent.toLowerCase();
+                    const email = item.querySelector('div > div:last-child').textContent.toLowerCase();
+                    
+                    if (name.includes(searchTerm) || email.includes(searchTerm)) {
+                        item.style.display = 'flex';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            }
+            
+            function startNewChat(user) {
+                // Check if chat already exists
+                const existingChat = chats.find(chat => 
+                    chat.type === 'direct' && chat.participants.includes(user.email)
+                );
+                
+                if (existingChat) {
+                    selectChat(existingChat);
+                    return;
+                }
+                
+                // Create new chat
+                const newChat = {
+                    id: generateId(),
+                    type: 'direct',
+                    participants: [currentUser.email, user.email],
+                    createdAt: new Date().toISOString(),
+                    messages: []
+                };
+                
+                // Save chat for current user
+                chats.push(newChat);
+                const chatsKey = `hexamailChats_${currentUser.email}`;
+                localStorage.setItem(chatsKey, JSON.stringify(chats));
+                
+                // Save chat for the other user
+                const otherChatsKey = `hexamailChats_${user.email}`;
+                let otherChats = JSON.parse(localStorage.getItem(otherChatsKey)) || [];
+                otherChats.push(newChat);
+                localStorage.setItem(otherChatsKey, JSON.stringify(otherChats));
+                
+                // Select the new chat
+                selectChat(newChat);
+                loadChats();
+                
+                showAlert(`Started a new chat with ${user.name}`, 'success');
+            }
+            
+            function loadMemberList() {
+                const users = JSON.parse(localStorage.getItem('hexamailUsers')) || [];
+                // Filter out current user
+                const otherUsers = users.filter(user => user.email !== currentUser.email);
+                
+                memberList.innerHTML = '';
+                otherUsers.forEach(user => {
+                    const memberEl = document.createElement('div');
+                    memberEl.className = 'member-item';
+                    memberEl.innerHTML = `
+                        <input type="checkbox" id="member-${user.email}" class="member-checkbox">
+                        <div class="member-avatar">${getInitials(user.name)}</div>
+                        <div>
+                            <div>${user.name}</div>
+                            <div style="font-size: 0.8rem; color: var(--darker);">${user.email}</div>
+                        </div>
+                    `;
+                    
+                    memberList.appendChild(memberEl);
+                });
+            }
+            
+            function filterMemberList() {
+                const searchTerm = searchMember.value.toLowerCase();
+                const memberItems = memberList.querySelectorAll('.member-item');
+                
+                memberItems.forEach(item => {
+                    const name = item.querySelector('div > div:first-child').textContent.toLowerCase();
+                    const email = item.querySelector('div > div:last-child').textContent.toLowerCase();
+                    
+                    if (name.includes(searchTerm) || email.includes(searchTerm)) {
+                        item.style.display = 'flex';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            }
+            
+            function createGroup(e) {
+                e.preventDefault();
+                
+                const name = groupName.value.trim();
+                const description = groupDesc.value.trim();
+                
+                if (!name) {
+                    showAlert('Please enter a group name', 'error');
+                    return;
+                }
+                
+                // Get selected members
+                const selectedMembers = [];
+                memberList.querySelectorAll('.member-checkbox:checked').forEach(checkbox => {
+                    const email = checkbox.id.replace('member-', '');
+                    selectedMembers.push(email);
+                });
+                
+                if (selectedMembers.length === 0) {
+                    showAlert('Please select at least one member', 'error');
+                    return;
+                }
+                
+                // Create group
+                const group = {
+                    id: generateId(),
+                    name,
+                    description,
+                    participants: [currentUser.email, ...selectedMembers],
+                    createdAt: new Date().toISOString()
+                };
+                
+                // Save group for current user
+                const groupsKey = `hexamailGroups_${currentUser.email}`;
+                let userGroups = JSON.parse(localStorage.getItem(groupsKey)) || [];
+                userGroups.push(group);
+                localStorage.setItem(groupsKey, JSON.stringify(userGroups));
+                
+                // Send invitations to selected members
+                selectedMembers.forEach(memberEmail => {
+                    sendGroupInvitation(group, memberEmail);
+                });
+                
+                // Create group chat
+                const groupChat = {
+                    id: group.id,
+                    type: 'group',
+                    name: group.name,
+                    description: group.description,
+                    participants: group.participants,
+                    createdAt: group.createdAt,
+                    messages: []
+                };
+                
+                chats.push(groupChat);
+                const chatsKey = `hexamailChats_${currentUser.email}`;
+                localStorage.setItem(chatsKey, JSON.stringify(chats));
+                
+                // Close modal and reset form
+                newGroupModal.classList.remove('active');
+                groupForm.reset();
+                
+                // Select the new group
+                selectChat(groupChat);
+                loadChats();
+                
+                showAlert(`Group "${name}" created successfully!`, 'success');
+            }
+            
+            function sendGroupInvitation(group, memberEmail) {
+                const invitation = {
+                    id: generateId(),
+                    type: 'group',
+                    fromEmail: currentUser.email,
+                    fromName: currentUser.name,
+                    groupId: group.id,
+                    groupName: group.name,
+                    groupDesc: group.description,
+                    participants: group.participants,
+                    date: new Date().toISOString()
+                };
+                
+                // Save invitation for the member
+                const invitationsKey = `hexamailInvitations_${memberEmail}`;
+                let memberInvitations = JSON.parse(localStorage.getItem(invitationsKey)) || [];
+                memberInvitations.push(invitation);
+                localStorage.setItem(invitationsKey, JSON.stringify(memberInvitations));
+            }
+            
+            function searchUsersToAdd() {
+                const searchTerm = addMemberInput.value.toLowerCase();
+                if (searchTerm.length < 2) {
+                    addMemberResults.innerHTML = '';
+                    return;
+                }
+                
+                const users = JSON.parse(localStorage.getItem('hexamailUsers')) || [];
+                // Filter out current user and existing group members
+                const filteredUsers = users.filter(user => 
+                    user.email !== currentUser.email && 
+                    !currentGroup.participants.includes(user.email) &&
+                    (user.name.toLowerCase().includes(searchTerm) || user.email.toLowerCase().includes(searchTerm))
+                );
+                
+                addMemberResults.innerHTML = '';
+                filteredUsers.forEach(user => {
+                    const userEl = document.createElement('div');
+                    userEl.className = 'member-item';
+                    userEl.innerHTML = `
+                        <div class="member-avatar">${getInitials(user.name)}</div>
+                        <div>
+                            <div>${user.name}</div>
+                            <div style="font-size: 0.8rem; color: var(--darker);">${user.email}</div>
+                        </div>
+                        <button class="btn btn-primary btn-sm add-member-btn" data-email="${user.email}">
+                            <i class="fas fa-plus"></i> Add
+                        </button>
+                    `;
+                    
+                    userEl.querySelector('.add-member-btn').addEventListener('click', () => {
+                        addMemberToGroup(user.email);
+                    });
+                    
+                    addMemberResults.appendChild(userEl);
+                });
+            }
+            
+            function addMemberToGroup(email) {
+                // Add to group participants
+                currentGroup.participants.push(email);
+                
+                // Update groups storage
+                const groupsKey = `hexamailGroups_${currentUser.email}`;
+                let userGroups = JSON.parse(localStorage.getItem(groupsKey)) || [];
+                const groupIndex = userGroups.findIndex(g => g.id === currentGroup.id);
+                if (groupIndex !== -1) {
+                    userGroups[groupIndex].participants = currentGroup.participants;
+                    localStorage.setItem(groupsKey, JSON.stringify(userGroups));
+                }
+                
+                // Send invitation to the new member
+                sendGroupInvitation(currentGroup, email);
+                
+                // Update UI
+                loadGroupMembers();
+                
+                showAlert('Member added to group', 'success');
+            }
+            
+            function loadGroupMembers() {
+                groupMembersList.innerHTML = '';
+                currentGroup.participants.forEach(participant => {
+                    const users = JSON.parse(localStorage.getItem('hexamailUsers')) || [];
+                    const user = users.find(u => u.email === participant) || { name: participant, email: participant };
+                    
+                    const memberEl = document.createElement('div');
+                    memberEl.className = 'member-item';
+                    memberEl.innerHTML = `
+                        <div class="member-avatar">${getInitials(user.name)}</div>
+                        <div>${user.name}</div>
+                        ${participant === currentUser.email ? '<div style="margin-left: auto; font-size: 0.8rem; color: var(--darker);">(You)</div>' : ''}
+                    `;
+                    groupMembersList.appendChild(memberEl);
+                });
+            }
+            
+            // Helper Functions
+            function formatDate(isoString, full = false) {
+                const date = new Date(isoString);
+                if (full) {
+                    return date.toLocaleString();
+                }
+                
+                const now = new Date();
+                const diffDays = Math.floor((now - date) / (1000 * 60 * 60 * 24));
+                
+                if (diffDays === 0) {
+                    return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                } else if (diffDays === 1) {
+                    return 'Yesterday';
+                } else if (diffDays < 7) {
+                    return date.toLocaleDateString([], { weekday: 'short' });
+                } else {
+                    return date.toLocaleDateString([], { month: 'short', day: 'numeric' });
+                }
+            }
+            
+            function getInitials(name) {
+                return name.split(' ').map(part => part[0]).join('').toUpperCase();
+            }
+            
+            function generateId() {
+                return Math.random().toString(36).substring(2) + Date.now().toString(36);
+            }
+            
+            function showAlert(message, type = 'info') {
+                const alert = document.createElement('div');
+                alert.className = `alert alert-${type}`;
+                alert.innerHTML = `
+                    <i class="fas fa-${type === 'error' ? 'exclamation-circle' : 'check-circle'}"></i>
+                    ${message}
+                `;
+                document.body.appendChild(alert);
+                
+                setTimeout(() => {
+                    alert.style.animation = 'fadeOut 0.3s';
+                    setTimeout(() => alert.remove(), 300);
+                }, 5000);
+            }
+        });
+    </script>
+</body>
+</html>
